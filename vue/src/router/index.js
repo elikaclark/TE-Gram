@@ -1,10 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store/index'
+
+//views
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
-import store from '../store/index'
+import Landing from '../views/Landing.vue'
+import Profile from '../views/Profile.vue'
+
+
 
 Vue.use(Router)
 
@@ -27,6 +33,22 @@ const router = new Router({
       component: Home,
       meta: {
         requiresAuth: true
+      }
+    },
+    {
+      path: '/landing',
+      name: 'landing',
+      component: Landing,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile,
+      meta: {
+        requiresAuth: false
       }
     },
     {
