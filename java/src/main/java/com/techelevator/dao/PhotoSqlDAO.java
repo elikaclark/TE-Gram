@@ -25,7 +25,7 @@ public class PhotoSqlDAO implements PhotoDAO {
 		String sqlSelect = "select * from photos";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sqlSelect);
 		 while(result.next()) {
-	           Photo photo = mapRowToUser(result);
+	           Photo photo = mapRowToPhoto(result);
 	            listOfPhotos.add(photo);
 	        }
 
@@ -52,30 +52,21 @@ public class PhotoSqlDAO implements PhotoDAO {
 	}
 
 	@Override
-	public Photo getPhotoById(int photo_id) {
+	public List<Photo> getPhotoByUserId(int user_id) {
+		List<Photo> listOfPhotos = new ArrayList<Photo>();
+		String sql = "select * from photos where user_id = ?";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, user_id);
 		
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Photo getDescription(String description) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Photo getPhotoSrc(String photo_src) {
-		// TODO Auto-generated method stub
-		return null;
+		while (results.next()) {
+			Photo photo = mapRowToPhoto(results);
+			listOfPhotos.add(photo);
+		}
+		return listOfPhotos;
 	}
 
 	
-		
-		
-		
-
-    private Photo mapRowToUser(SqlRowSet rs) {
+	
+		private Photo mapRowToPhoto(SqlRowSet rs) {
         Photo photo = new Photo();
         photo.setPhoto_id(rs.getInt("photo_id"));
         photo.setDescription(rs.getString("description"));
@@ -85,11 +76,5 @@ public class PhotoSqlDAO implements PhotoDAO {
         photo.setUser_id(rs.getInt("user_id"));
         return photo;
     }
-
-	
-	
-	
-	
-	
 
 }
