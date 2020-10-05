@@ -7,5 +7,8 @@ import com.techelevator.model.Comment;
 public interface CommentDAO {
 
 	List<Comment> findAll();
-	public boolean addComment(String comment, int photoId, int userId);
+	
+	public boolean addComment(Comment comment);
+	
+	public boolean deleteComment(Comment comment);
 }
