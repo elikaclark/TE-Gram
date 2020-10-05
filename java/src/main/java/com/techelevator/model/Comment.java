@@ -48,6 +48,4 @@ public class Comment {
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
-
-	
 }
