@@ -41,13 +41,13 @@ public class AuthenticationController {
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginDTO loginDto) {
 
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
+                new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
 
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = tokenProvider.createToken(authentication, false);
         
-        User user = userDAO.findByEmail(loginDto.getEmail());
+        User user = userDAO.findByUsername(loginDto.getUsername());
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
@@ -68,7 +68,7 @@ public class AuthenticationController {
             }
             //            throw new UserAlreadyExistsException();
         } catch (UsernameNotFoundException e) {
-            userDAO.create(newUser.getUsername(),newUser.getPassword(), newUser.getEmail(), newUser.getRole());
+            userDAO.create(newUser.getUsername(),newUser.getPassword(), newUser.getRole());
         }
 //        User userByUsername = userDAO.findByUsername(newUser.getUsername());
 //        User userByEmail = userDAO.findByEmail(newUser.getEmail());

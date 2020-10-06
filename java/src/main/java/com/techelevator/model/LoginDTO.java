@@ -3,27 +3,17 @@ package com.techelevator.model;
 /**
  * DTO for storing a user's credentials.
  */
-public class   LoginDTO {
+public class LoginDTO {
 
-//   private String username;
-   private String email;
+   private String username;
    private String password;
 
-//   public String getUsername() {
-//      return username;
-//   }
-
-//   public void setUsername(String username) {
-//      this.username = username;
-//   }
-
-
-   public String getEmail() {
-      return email;
+   public String getUsername() {
+      return username;
    }
 
-   public void setEmail(String email) {
-      this.email = email;
+   public void setUsername(String username) {
+      this.username = username;
    }
 
    public String getPassword() {
@@ -37,15 +27,8 @@ public class   LoginDTO {
    @Override
    public String toString() {
       return "LoginDTO{" +
-              "email='" + email + '\'' +
+              "username='" + username + '\'' +
               ", password='" + password + '\'' +
               '}';
    }
-//   @Override
-//   public String toString() {
-//      return "LoginDTO{" +
-//              "username='" + username + '\'' +
-//              ", password='" + password + '\'' +
-//              '}';
-//   }
 }
