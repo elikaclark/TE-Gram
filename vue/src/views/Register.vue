@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container main">
     <div class="row">
       <div class="col-sm-12 col-lg-6 picBox">
         <img
@@ -13,6 +13,7 @@
       >
         <div id="register" class="text-center">
           <form class="form-register" @submit.prevent="register">
+            <h1>☕ TE Gram</h1>
             <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
             <div
               class="alert alert-danger"
@@ -22,37 +23,44 @@
               {{ registrationErrorMsg }}
             </div>
             <label for="username" class="sr-only">Username</label>
-            <input
-              type="text"
-              id="username"
-              class="form-control"
-              placeholder="Username"
-              v-model="user.username"
-              required
-              autofocus
-            />
-            <label for="password" class="sr-only">Password</label>
-            <input
-              type="password"
-              id="password"
-              class="form-control"
-              placeholder="Password"
-              v-model="user.password"
-              required
-            />
-            <input
-              type="password"
-              id="confirmPassword"
-              class="form-control"
-              placeholder="Confirm Password"
-              v-model="user.confirmPassword"
-              required
-            />
-
+            <div class="inputBox">
+              <div class="d-flex justify-content-center inputBox">
+              <input
+                type="text"
+                id="username"
+                class="form-control"
+                placeholder="Username"
+                v-model="user.username"
+                required
+                autofocus
+              />
+              </div>
+              <label for="password" class="sr-only">Password</label>
+              <div class="d-flex justify-content-center inputBox">
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                placeholder="Password"
+                v-model="user.password"
+                required
+              />
+              </div>
+              <div class="d-flex justify-content-center inputBox">
+              <input
+                type="password"
+                id="confirmPassword"
+                class="form-control"
+                placeholder="Confirm Password"
+                v-model="user.confirmPassword"
+                required
+              />
+              </div>
+            </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">
               Create Account
             </button>
-            <router-link :to="{ name: 'login' }">Have an account?</router-link>
+            <router-link :to="{ name: 'login' }">Already have an account?</router-link>
           </form>
         </div>
       </div>
@@ -64,47 +72,35 @@
 import authService from "../services/AuthService";
 
 export default {
-  name: "register",
+  name: "login",
+  components: {},
   data() {
     return {
       user: {
         username: "",
         password: "",
-        confirmPassword: "",
-        role: "user",
       },
-      registrationErrors: false,
-      registrationErrorMsg: "There were problems registering this user.",
+      invalidCredentials: false,
     };
   },
   methods: {
-    register() {
-      if (this.user.password != this.user.confirmPassword) {
-        this.registrationErrors = true;
-        this.registrationErrorMsg = "Password & Confirm Password do not match.";
-      } else {
-        authService
-          .register(this.user)
-          .then((response) => {
-            if (response.status == 201) {
-              this.$router.push({
-                path: "/login",
-                query: { registration: "success" },
-              });
-            }
-          })
-          .catch((error) => {
-            const response = error.response;
-            this.registrationErrors = true;
-            if (response.status === 400) {
-              this.registrationErrorMsg = "Bad Request: Validation Errors";
-            }
-          });
-      }
-    },
-    clearErrors() {
-      this.registrationErrors = false;
-      this.registrationErrorMsg = "There were problems registering this user.";
+    login() {
+      authService
+        .login(this.user)
+        .then((response) => {
+          if (response.status == 200) {
+            this.$store.commit("SET_AUTH_TOKEN", response.data.token);
+            this.$store.commit("SET_USER", response.data.user);
+            this.$router.push("/");
+          }
+        })
+        .catch((error) => {
+          const response = error.response;
+
+          if (response.status === 401) {
+            this.invalidCredentials = true;
+          }
+        });
     },
   },
 };
@@ -132,15 +128,25 @@ export default {
   margin-top: 20%;
 }
 
+.inputBox {
+  margin: 10px 0;
+}
+
 @media (max-width: 990px) {
   .form-box {
     background-image: url("https://i.pinimg.com/originals/0a/f4/ce/0af4ce7d0f95c36448c86b67589342fe.gif");
-    background-size: 100% 720px;
+    background-size: cover;
     background-repeat: no-repeat;
   }
 
   .form-control {
-    width: 100%;
+    width: 90%;
+  }
+
+  .form-register {
+    background-color: rgba(250, 250, 250, 0.5);
+    border-radius: 20px;
+    padding: 30px;
   }
 
   .form-signin {
@@ -152,6 +158,16 @@ export default {
   .picBox {
     display: none;
     order: 2;
+  }
+}
+
+@media (max-width: 575px) {
+  .form-box {
+    position: absolute;
+    top: -10%;
+    height: 110%;
+    background-size: cover;
+    border-radius: 0px;
   }
 }
 </style>

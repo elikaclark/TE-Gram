@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container main">
     <div class="row">
       <div class="col-sm-12 col-lg-6 picBox">
         <img
@@ -14,7 +14,7 @@
         <div id="login" class="text-center">
           <form class="form-signin" @submit.prevent="login">
             <h1>☕ TE Gram</h1>
-            <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Login</h1>
             <div
               class="alert alert-danger"
               role="alert"
@@ -52,10 +52,12 @@
                 required
               />
             </div>
-            <router-link :to="{ name: 'register' }"
-              >Need an account?</router-link
+            <button class="btn btn-lg btn-primary btn-block" type="submit">
+              Sign in
+            </button>
+            <router-link :to="{ name: 'register' }">
+              Need an account?</router-link
             >
-            <button class="btn btn-success" type="submit">Sign in</button>
           </form>
         </div>
       </div>
@@ -124,29 +126,40 @@ export default {
 }
 
 .inputBox {
-  margin: 10px;
+  margin: 10px 0;
 }
 
 @media (max-width: 990px) {
   .form-box {
     background-image: url("https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80");
-    background-size: 720px 500px;
+    background-size: 720px 600px;
     background-repeat: no-repeat;
   }
 
   .form-control {
-    width: 80%;
+    width: 90%;
   }
 
   .form-signin {
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    height: auto;
     background: rgba(250, 250, 250, 0.7);
     border-radius: 30px;
+    padding: 40px;
   }
   .picBox {
     display: none;
     order: 2;
+  }
+}
+
+@media (max-width: 575px) {
+  .form-box {
+    position: absolute;
+    top: -10%;
+    height: 110%;
+    background-size: cover;
+    border-radius: 0px;
   }
 }
 </style>
