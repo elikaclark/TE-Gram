@@ -14,15 +14,25 @@ public class User {
    private String password;
    @JsonIgnore
    private boolean activated;
+   private String email;
    private Set<Authority> authorities = new HashSet<>();
 
    public User() { }
 
-   public User(Long id, String username, String password, String authorities) {
+   public User(Long id, String username, String password, String email, String authorities) {
       this.id = id;
       this.username = username;
       this.password = password;
+      this.email = email;
       this.activated = true;
+   }
+
+   public String getEmail() {
+      return email;
+   }
+
+   public void setEmail(String email) {
+      this.email = email;
    }
 
    public Long getId() {
@@ -82,12 +92,13 @@ public class User {
               activated == user.activated &&
               Objects.equals(username, user.username) &&
               Objects.equals(password, user.password) &&
+              Objects.equals(email, user.email) &&
               Objects.equals(authorities, user.authorities);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(id, username, password, activated, authorities);
+      return Objects.hash(id, username, password, activated, email, authorities);
    }
 
    @Override
@@ -96,6 +107,7 @@ public class User {
               "id=" + id +
               ", username='" + username + '\'' +
               ", activated=" + activated +
+              ", email=" + email +
               ", authorities=" + authorities +
               '}';
    }

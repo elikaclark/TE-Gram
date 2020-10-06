@@ -63,11 +63,21 @@ public class UserSqlDAO implements UserDAO {
     }
 
     @Override
-    public boolean create(String username, String password, String role) {
+    public User findByEmail(String email) {
+        for (User user : this.findAll()) {
+            if( user.getEmail().toLowerCase().equals(email.toLowerCase())) {
+                return user;
+            }
+        }
+        throw new UsernameNotFoundException("Email " + email + " was not found.");
+    }
+
+    @Override
+    public boolean create(String username, String password, String email, String role) {
         boolean userCreated = false;
 
         // create user
-        String insertUser = "insert into users (username,password_hash,role) values(?,?,?)";
+        String insertUser = "insert into users (username,password_hash, email, role) values(?,?,?,?)";
         String password_hash = new BCryptPasswordEncoder().encode(password);
         String ssRole = "ROLE_" + role.toUpperCase();
 
@@ -77,7 +87,8 @@ public class UserSqlDAO implements UserDAO {
                     PreparedStatement ps = con.prepareStatement(insertUser, new String[]{id_column});
                     ps.setString(1, username);
                     ps.setString(2, password_hash);
-                    ps.setString(3, ssRole);
+                    ps.setString(3,email);
+                    ps.setString(4, ssRole);
                     return ps;
                 }
                 , keyHolder) == 1;
@@ -91,6 +102,7 @@ public class UserSqlDAO implements UserDAO {
         user.setId(rs.getLong("user_id"));
         user.setUsername(rs.getString("username"));
         user.setPassword(rs.getString("password_hash"));
+        user.setEmail(rs.getString("email"));
         user.setAuthorities(rs.getString("role"));
         user.setActivated(true);
         return user;
