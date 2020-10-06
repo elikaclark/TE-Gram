@@ -30,6 +30,7 @@ CREATE TABLE users (
 	user_id int DEFAULT nextval('seq_user_id'::regclass) NOT NULL,
 	username varchar(50) NOT NULL,
 	password_hash varchar(200) NOT NULL,
+	email varchar(70) NOT NULL,
 	role varchar(50) NOT NULL,
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
@@ -69,14 +70,14 @@ CREATE TABLE comments (
 );
 
 --Users
-INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
-INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
+INSERT INTO users (username,password_hash,email,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','user@te.com','ROLE_USER');
+INSERT INTO users (username,password_hash,email,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','admin@te.com','ROLE_ADMIN');
 
 
 --PASSWORD For all: test
-INSERT INTO users (username, password_hash, role) values ('user1', '$2a$10$GQkjEhtiXfN5dOKkXwWm4eazZG1kqvWrhoGllzXmaFiO5YT0P6oTK', 'ROLE_USER');
-INSERT INTO users (username, password_hash, role) values ('user2', '$2a$10$GQkjEhtiXfN5dOKkXwWm4eazZG1kqvWrhoGllzXmaFiO5YT0P6oTK', 'ROLE_USER');
-INSERT INTO users (username, password_hash, role) values ('user3', '$2a$10$GQkjEhtiXfN5dOKkXwWm4eazZG1kqvWrhoGllzXmaFiO5YT0P6oTK', 'ROLE_USER');
+INSERT INTO users (username, password_hash, email, role) values ('user1', '$2a$10$GQkjEhtiXfN5dOKkXwWm4eazZG1kqvWrhoGllzXmaFiO5YT0P6oTK', 'user1@email.com', 'ROLE_USER');
+INSERT INTO users (username, password_hash, email, role) values ('user2', '$2a$10$GQkjEhtiXfN5dOKkXwWm4eazZG1kqvWrhoGllzXmaFiO5YT0P6oTK', 'user2@email.com', 'ROLE_USER');
+INSERT INTO users (username, password_hash, email, role) values ('user3', '$2a$10$GQkjEhtiXfN5dOKkXwWm4eazZG1kqvWrhoGllzXmaFiO5YT0P6oTK', 'user3@email.com', 'ROLE_USER');
 
 
 --PHOTOS
