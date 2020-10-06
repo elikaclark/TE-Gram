@@ -21,8 +21,6 @@ import com.techelevator.model.UserAlreadyExistsException;
 import com.techelevator.security.jwt.JWTFilter;
 import com.techelevator.security.jwt.TokenProvider;
 
-import static java.util.Objects.isNull;
-
 @RestController
 @CrossOrigin
 public class AuthenticationController {
@@ -58,27 +56,11 @@ public class AuthenticationController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public void register(@Valid @RequestBody RegisterUserDTO newUser) {
         try {
-            User userByUsername = userDAO.findByUsername(newUser.getUsername());
-            User userByEmail = userDAO.findByEmail(newUser.getEmail());
-
-            if(isNull(userByUsername) || isNull(userByEmail)) {
-                throw new UserAlreadyExistsException();
-            }else{
-                userDAO.create(newUser.getUsername(),newUser.getPassword(), newUser.getEmail(), newUser.getRole());
-            }
-            //            throw new UserAlreadyExistsException();
+            User user = userDAO.findByUsername(newUser.getUsername());
+            throw new UserAlreadyExistsException();
         } catch (UsernameNotFoundException e) {
             userDAO.create(newUser.getUsername(),newUser.getPassword(), newUser.getRole());
         }
-//        User userByUsername = userDAO.findByUsername(newUser.getUsername());
-//        User userByEmail = userDAO.findByEmail(newUser.getEmail());
-//
-//        if(userByUsername == null || userByEmail == null){
-//            throw new UserAlreadyExistsException();
-//        }else{
-//            userDAO.create(newUser.getUsername(),newUser.getPassword(), newUser.getEmail(), newUser.getRole());
-//        }
-
     }
 
     /**
