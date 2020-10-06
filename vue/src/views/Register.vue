@@ -22,6 +22,20 @@
             >
               {{ registrationErrorMsg }}
             </div>
+            <!-- <label for="email" class="sr-only">Email</label>
+            <div class="inputBox">
+              <div class="d-flex justify-content-center inputBox">
+              <input
+                type="text"
+                id="email"
+                class="form-control"
+                placeholder="Email"
+                v-model="user.email"
+                required
+                autofocus
+              />
+              </div>
+            </div> -->
             <label for="username" class="sr-only">Username</label>
             <div class="inputBox">
               <div class="d-flex justify-content-center inputBox">
@@ -72,35 +86,47 @@
 import authService from "../services/AuthService";
 
 export default {
-  name: "login",
-  components: {},
+    name: "register",
   data() {
     return {
       user: {
         username: "",
         password: "",
+        confirmPassword: "",
+        role: "user",
       },
-      invalidCredentials: false,
+      registrationErrors: false,
+      registrationErrorMsg: "There were problems registering this user.",
     };
   },
   methods: {
-    login() {
-      authService
-        .login(this.user)
-        .then((response) => {
-          if (response.status == 200) {
-            this.$store.commit("SET_AUTH_TOKEN", response.data.token);
-            this.$store.commit("SET_USER", response.data.user);
-            this.$router.push("/");
-          }
-        })
-        .catch((error) => {
-          const response = error.response;
-
-          if (response.status === 401) {
-            this.invalidCredentials = true;
-          }
-        });
+    register() {
+      if (this.user.password != this.user.confirmPassword) {
+        this.registrationErrors = true;
+        this.registrationErrorMsg = "Password & Confirm Password do not match.";
+      } else {
+        authService
+          .register(this.user)
+          .then((response) => {
+            if (response.status == 201) {
+              this.$router.push({
+                path: "/login",
+                query: { registration: "success" },
+              });
+            }
+          })
+          .catch((error) => {
+            const response = error.response;
+            this.registrationErrors = true;
+            if (response.status === 400) {
+              this.registrationErrorMsg = "Bad Request: Validation Errors";
+            }
+          });
+      }
+    },
+    clearErrors() {
+      this.registrationErrors = false;
+      this.registrationErrorMsg = "There were problems registering this user.";
     },
   },
 };
