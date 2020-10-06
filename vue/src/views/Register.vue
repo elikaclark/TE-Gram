@@ -25,7 +25,7 @@
             <label for="email" class="sr-only">Email</label>
             <div class="inputBox">
               <div class="d-flex justify-content-center inputBox">
-              <input
+              <!-- <input
                 type="text"
                 id="email"
                 class="form-control"
@@ -33,17 +33,18 @@
                 v-model="user.email"
                 required
                 autofocus
-              />
+              /> -->
               </div>
             </div>
             <label for="username" class="sr-only">Username</label>
             <div class="inputBox">
+            <!-- USERNAME REQUIRES @ and .com -->
               <div class="d-flex justify-content-center inputBox">
               <input
-                type="text"
+                type="email"
                 id="username"
                 class="form-control"
-                placeholder="Username"
+                placeholder="Email"
                 v-model="user.username"
                 required
                 autofocus
