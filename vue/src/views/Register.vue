@@ -22,7 +22,7 @@
             >
               {{ registrationErrorMsg }}
             </div>
-            <!-- <label for="email" class="sr-only">Email</label>
+            <label for="email" class="sr-only">Email</label>
             <div class="inputBox">
               <div class="d-flex justify-content-center inputBox">
               <input
@@ -35,7 +35,7 @@
                 autofocus
               />
               </div>
-            </div> -->
+            </div>
             <label for="username" class="sr-only">Username</label>
             <div class="inputBox">
               <div class="d-flex justify-content-center inputBox">
@@ -67,6 +67,9 @@
                 class="form-control"
                 placeholder="Confirm Password"
                 v-model="user.confirmPassword"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                title="Must contain at least one number and
+                 one uppercase and lowercase letter, and at least 8 or more characters"
                 required
               />
               </div>
@@ -90,6 +93,7 @@ export default {
   data() {
     return {
       user: {
+        email: "",
         username: "",
         password: "",
         confirmPassword: "",

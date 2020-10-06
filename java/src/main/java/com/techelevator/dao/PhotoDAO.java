@@ -12,6 +12,7 @@ public interface PhotoDAO {
 	public boolean addPhoto(Photo photo);
 	public boolean deletePhoto(Photo photo);
 	public List<Photo>  getPhotoByUserId(int user_id);
+	public Photo getProfilePic(int user_id);
 	
 	
 	

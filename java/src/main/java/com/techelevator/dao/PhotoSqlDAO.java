@@ -63,6 +63,13 @@ public class PhotoSqlDAO implements PhotoDAO {
 		}
 		return listOfPhotos;
 	}
+	
+
+	@Override
+	public Photo getProfilePic(int user_id) {
+		
+		return null;
+	}
 
 	
 	
@@ -76,5 +83,6 @@ public class PhotoSqlDAO implements PhotoDAO {
         photo.setUser_id(rs.getInt("user_id"));
         return photo;
     }
+
 
 }
