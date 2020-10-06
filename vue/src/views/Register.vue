@@ -25,15 +25,15 @@
             <label for="email" class="sr-only">Email</label>
             <div class="inputBox">
               <div class="d-flex justify-content-center inputBox">
-              <!-- <input
+              <input
                 type="text"
-                id="email"
+                id="name"
                 class="form-control"
-                placeholder="Email"
-                v-model="user.email"
+                placeholder="Name"
+                v-model="user.name"
                 required
                 autofocus
-              /> -->
+              />
               </div>
             </div>
             <label for="username" class="sr-only">Username</label>

@@ -7,6 +7,8 @@ public class RegisterUserDTO {
     @NotEmpty
     private String username;
     @NotEmpty
+    private String name;
+	@NotEmpty
     private String password;
     @NotEmpty
     private String confirmPassword;
@@ -44,4 +46,12 @@ public class RegisterUserDTO {
     public void setRole(String role) {
         this.role = role;
     }
+    
+    public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }
