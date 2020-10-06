@@ -5,11 +5,11 @@ import java.util.List;
 import com.techelevator.model.UserToFavorite;
 
 public interface UserToFavoriteDAO {
-	
-	public abstract List<UserToFavorite> getAllUserFavorites();
-	
-	public void addFavorite(UserToFavorite userFavorite);
-	
-	public void deleteFavorite(UserToFavorite userFavorite);
+
+	List<UserToFavorite> getAllFavorites();
+	List<UserToFavorite> getAllUserFavorites(Long userId);
+	List<UserToFavorite> getAllFavoritesByPhotoId(Long photoId);
+	boolean addFavorite(UserToFavorite userFavorite);
+	boolean deleteFavorite(UserToFavorite userFavorite);
 	
 }

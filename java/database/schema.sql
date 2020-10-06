@@ -34,8 +34,6 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
-INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
-INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
 
 CREATE TABLE photos(
     photo_id int DEFAULT nextval('seq_photo_id'::regclass) NOT NULL,
@@ -44,9 +42,11 @@ CREATE TABLE photos(
     likes int,
     datetime timestamp NOT NULL,
     user_id int NOT NULL,
+    profile boolean DEFAULT false,
     CONSTRAINT PK_photo PRIMARY KEY (photo_id),
     CONSTRAINT FK_user FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+
 
 CREATE TABLE UserToFavorite (
     user_id int NOT NULL,
@@ -55,15 +55,68 @@ CREATE TABLE UserToFavorite (
     CONSTRAINT FK_photo FOREIGN KEY (photo_id) REFERENCES photos(photo_id)
 );
 
+
 CREATE TABLE comments (
     comment_id int DEFAULT nextval('seq_comment_id'::regclass) NOT NULL,
     likes int,
     text varchar(1000) NOT NULL,
     photo_id int NOT NULL,
+    user_id int NOT NULL,
     datetime timestamp NOT NULL,
     CONSTRAINT PK_comment PRIMARY KEY (comment_id),
-    CONSTRAINT FK_photo FOREIGN KEY (photo_id) REFERENCES photos(photo_id)
+    CONSTRAINT FK_photo FOREIGN KEY (photo_id) REFERENCES photos(photo_id),
+    CONSTRAINT FK_user FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
+
+--Users
+INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
+INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
+
+
+--PASSWORD For all: test
+INSERT INTO users (username, password_hash, role) values ('user1', '$2a$10$GQkjEhtiXfN5dOKkXwWm4eazZG1kqvWrhoGllzXmaFiO5YT0P6oTK', 'ROLE_USER');
+INSERT INTO users (username, password_hash, role) values ('user2', '$2a$10$GQkjEhtiXfN5dOKkXwWm4eazZG1kqvWrhoGllzXmaFiO5YT0P6oTK', 'ROLE_USER');
+INSERT INTO users (username, password_hash, role) values ('user3', '$2a$10$GQkjEhtiXfN5dOKkXwWm4eazZG1kqvWrhoGllzXmaFiO5YT0P6oTK', 'ROLE_USER');
+
+
+--PHOTOS
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data1', 'dummy src', 3, current_timestamp, 3);
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data2', 'dummy src', 2, current_timestamp, 3);
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data3', 'dummy src', 0, current_timestamp, 3);
+
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data4', 'dummy src', 6, current_timestamp, 4);
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data5', 'dummy src', 8, current_timestamp, 4);
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data6', 'dummy src', 1, current_timestamp, 4);
+
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data7', 'dummy src', 1, current_timestamp, 5);
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data8', 'dummy src', 9, current_timestamp, 5);
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data9', 'dummy src', 5, current_timestamp, 5);
+
+--USERSTOFAVORITES
+INSERT INTO UserToFavorite (user_id, photo_id) VALUES (3, 7);
+INSERT INTO UserToFavorite (user_id, photo_id) VALUES (3, 8);
+INSERT INTO UserToFavorite (user_id, photo_id) VALUES (3, 9);
+
+INSERT INTO UserToFavorite (user_id, photo_id) VALUES (4, 1);
+INSERT INTO UserToFavorite (user_id, photo_id) VALUES (4, 2);
+INSERT INTO UserToFavorite (user_id, photo_id) VALUES (4, 3);
+
+INSERT INTO UserToFavorite (user_id, photo_id) VALUES (5, 4);
+INSERT INTO UserToFavorite (user_id, photo_id) VALUES (5, 5);
+INSERT INTO UserToFavorite (user_id, photo_id) VALUES (5, 6);
+
+--COMMENTS
+INSERT INTO comments (likes, text, photo_id, user_id, datetime) VALUES (3, 'Dummy text1', 1, 4, current_timestamp);
+INSERT INTO comments (likes, text, photo_id, user_id, datetime) VALUES (1, 'Dummy text2', 2, 4, current_timestamp);
+INSERT INTO comments (likes, text, photo_id, user_id, datetime) VALUES (0, 'Dummy text3', 3, 4, current_timestamp);
+
+INSERT INTO comments (likes, text, photo_id, user_id, datetime) VALUES (1, 'Dummy text4', 4, 5, current_timestamp);
+INSERT INTO comments (likes, text, photo_id, user_id, datetime) VALUES (5, 'Dummy text5', 5, 5, current_timestamp);
+INSERT INTO comments (likes, text, photo_id, user_id, datetime) VALUES (6, 'Dummy text6', 6, 5, current_timestamp);
+
+INSERT INTO comments (likes, text, photo_id, user_id, datetime) VALUES (3, 'Dummy text7', 7, 3, current_timestamp);
+INSERT INTO comments (likes, text, photo_id, user_id, datetime) VALUES (1, 'Dummy text8', 8, 3, current_timestamp);
+INSERT INTO comments (likes, text, photo_id, user_id, datetime) VALUES (0, 'Dummy text9', 9, 3, current_timestamp);
 
 --ROLLBACK;
 COMMIT TRANSACTION;
