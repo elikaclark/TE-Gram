@@ -36,6 +36,9 @@
           </ul>
         </div>
       </nav>
+      <br>
+      <br>
+      <br>
     </div>
 
     <router-view />
