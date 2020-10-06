@@ -30,13 +30,13 @@
               Thank you for registering, please sign in.
             </div>
             <div class="d-flex justify-content-center inputBox">
-              <label for="username" class="sr-only">Username</label>
+              <label for="email" class="sr-only">Email</label>
               <input
-                type="text"
-                id="username"
+                type="email"
+                id="email"
                 class="form-control"
-                placeholder="Username"
-                v-model="user.username"
+                placeholder="Email"
+                v-model="user.email"
                 required
                 autofocus
               />
@@ -74,7 +74,7 @@ export default {
   data() {
     return {
       user: {
-        username: "",
+        email: "",
         password: "",
       },
       invalidCredentials: false,
