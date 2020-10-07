@@ -143,7 +143,7 @@ export default {
 }
 
 .form-box {
-  height: 700px;
+  height: 600px;
   border-radius: 15px;
   border: 2px gray solid;
   padding-left: 0%;
@@ -151,12 +151,9 @@ export default {
 }
 
 .loginPic {
-  height: 700px;
-  width: 100%;
+  height: 600px;
+  width: 80%;
   border-radius: 15px;
-}
-.row {
-  margin-top: 20%;
 }
 
 .inputBox {
@@ -190,6 +187,10 @@ export default {
     display: none;
     order: 2;
   }
+}
+
+.row {
+  margin-top: -2%;
 }
 
 @media (max-width: 575px) {

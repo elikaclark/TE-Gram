@@ -13,32 +13,33 @@ import com.techelevator.model.Photo;
 public class PhotoSqlDAO implements PhotoDAO {
 
 	private JdbcTemplate jdbcTemplate;
-	
+
 	public PhotoSqlDAO(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+		this.jdbcTemplate = jdbcTemplate;
+	}
 
 	@Override
 	public List<Photo> findAllPhotos() {
 		List<Photo> listOfPhotos = new ArrayList<Photo>();
-		
+
 		String sqlSelect = "select * from photos";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sqlSelect);
-		 while(result.next()) {
-	           Photo photo = mapRowToPhoto(result);
-	            listOfPhotos.add(photo);
-	        }
-
-	        return listOfPhotos;
+		while (result.next()) {
+			Photo photo = mapRowToPhoto(result);
+			listOfPhotos.add(photo);
 		}
-	
+
+		return listOfPhotos;
+	}
+
 	@Override
 	public void addPhoto(Photo photo) {
 		boolean photoAdded = false;
+
 		String insertPhoto = "INSERT INTO photos ( description, photo_src, likes, datetime, user_id) values(?,?,?,?,?)";
 		photoAdded = jdbcTemplate.update(insertPhoto, photo.getDescription(), photo.getPhoto_src(), photo.getLikes(), photo.getTimestamp(), photo.getUser_id()) == 1;
 		
-		
+
 	}
 
 	@Override
@@ -48,7 +49,7 @@ public class PhotoSqlDAO implements PhotoDAO {
 		jdbcTemplate.update(sqlDelete, photo_id);
 		
 		// TODO Auto-generated method stub
-	
+
 	}
 
 	@Override
@@ -56,22 +57,21 @@ public class PhotoSqlDAO implements PhotoDAO {
 		List<Photo> listOfPhotos = new ArrayList<Photo>();
 		String sql = "select * from photos where user_id = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, user_id);
-		
+
 		while (results.next()) {
 			Photo photo = mapRowToPhoto(results);
 			listOfPhotos.add(photo);
 		}
 		return listOfPhotos;
 	}
-	
 
 	@Override
 	public Photo getProfilePic(int user_id) {
-		
+
 		return null;
 	}
 
-	
+
 	
 		private Photo mapRowToPhoto(SqlRowSet rs) {
         Photo photo = new Photo();
