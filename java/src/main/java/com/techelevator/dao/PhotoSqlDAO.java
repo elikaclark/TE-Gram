@@ -33,20 +33,20 @@ public class PhotoSqlDAO implements PhotoDAO {
 		}
 	
 	@Override
-	public boolean addPhoto(Photo photo) {
+	public void addPhoto(Photo photo) {
 		boolean photoAdded = false;
-		String insertPhoto = "Insert into photos ( description, photo_src, ikes, datetime, user_id) values(?,?,?,?,?)";
+		String insertPhoto = "INSERT INTO photos ( description, photo_src, likes, datetime, user_id) values(?,?,?,?,?)";
 		photoAdded = jdbcTemplate.update(insertPhoto, photo.getDescription(), photo.getPhoto_src(), photo.getLikes(), photo.getTimestamp(), photo.getUser_id()) == 1;
-		// TODO Auto-generated method stub
-		return photoAdded;
+		
+		
 	}
 
 	@Override
-	public boolean deletePhoto(Photo photo) {
+	public void deletePhoto(int photo_id) {
 		boolean photoDeleted;
-		String sqlDelete = "Delete from photos where photo_id = ?";
-		photoDeleted = jdbcTemplate.update(sqlDelete, photo.getPhoto_id()) == 1;
-		return photoDeleted;
+		String sqlDelete = "DELETE FROM photos where photo_id = ?";
+		jdbcTemplate.update(sqlDelete, photo_id);
+		
 		// TODO Auto-generated method stub
 	
 	}
@@ -79,7 +79,7 @@ public class PhotoSqlDAO implements PhotoDAO {
         photo.setDescription(rs.getString("description"));
         photo.setPhoto_src(rs.getString("photo_src"));
         photo.setLikes(rs.getInt("likes"));
-        photo.setTimestamp(rs.getDate("timestamp"));
+        photo.setTimestamp(rs.getDate("datetime"));
         photo.setUser_id(rs.getInt("user_id"));
         return photo;
     }
