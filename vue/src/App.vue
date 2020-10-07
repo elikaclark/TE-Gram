@@ -7,7 +7,7 @@
         class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end fixed-top"
       >
         <router-link v-bind:to="{ name: 'home' }">☕TE GRAM</router-link>
-        <button class="btn btn-success ml-auto mr-1">New Post</button>
+        <router-link class="btn btn-success ml-auto mr-1" v-bind:to="{ name: 'upload' }">New Post</router-link>
         <router-link
           class="btn btn-danger ml-auto mr-1"
           v-bind:to="{ name: 'logout' }"
@@ -31,7 +31,7 @@
               <router-link v-bind:to="{ name: 'profile' }">Profile</router-link>
             </li>
             <li class="nav-item active">
-              <router-link v-bind:to="{ name: 'Favorites' }">Favorites</router-link>
+              <router-link v-bind:to="{ name: 'favorites' }">Favorites</router-link>
             </li>
           </ul>
         </div>

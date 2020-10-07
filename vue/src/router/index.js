@@ -8,6 +8,8 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import Profile from '../views/Profile.vue'
+import Upload from '../views/Upload.vue'
+import Test from '../views/Test.vue'
 
 Vue.use(Router)
 
@@ -28,6 +30,14 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: Home,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/upload',
+      name: 'upload',
+      component: Upload,
       meta: {
         requiresAuth: true
       }
@@ -62,6 +72,14 @@ const router = new Router({
       component: Register,
       meta: {
         requiresAuth: false
+      }
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: Test,
+      meta: {
+        requiresAuth: true
       }
     },
   ]
