@@ -6,9 +6,11 @@
           <img
             class="userPic"
             src="https://images.unsplash.com/photo-1534278931827-8a259344abe7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
-            alt=""
+            alt
           />
-          <span><b>UserName</b></span>
+          <span>
+            <b>UserName</b>
+          </span>
         </div>
         <div class="col-sm-3 col-md-3 d-flex text-center">
           <span>POSTS:#</span>
@@ -26,75 +28,79 @@
         <div class="postUser">🧍 Username</div>
         <div>
           <img
-            class="postImg"
+            class="postImg imgHover"
             src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-            alt=""
+            alt
+            data-toggle="modal"
+            data-target="#picModal"
           />
-        </div>
-        <div>
-          <span class="postIcons">♡</span>
-          <span class="postIcons">💬</span>
-          <span class="postIcons">✈</span>
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-4 post-box">
-        <div class="postUser">🧍 Username</div>
-        <div>
-          <img
-            class="postImg"
-            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-            alt=""
-          />
-        </div>
-        <div>
-          <span class="postIcons">♡</span>
-          <span class="postIcons">💬</span>
-          <span class="postIcons">✈</span>
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-4 post-box">
-        <div class="postUser">🧍 Username</div>
-        <div>
-          <img
-            class="postImg"
-            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-            alt=""
-          />
-        </div>
-        <div>
-          <span class="postIcons">♡</span>
-          <span class="postIcons">💬</span>
-          <span class="postIcons">✈</span>
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-4 post-box">
-        <div class="postUser">🧍 Username</div>
-        <div>
-          <img
-            class="postImg"
-            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-            alt=""
-          />
-        </div>
-        <div>
-          <span class="postIcons">♡</span>
-          <span class="postIcons">💬</span>
-          <span class="postIcons">✈</span>
-        </div>
-      </div>
-      <div class="col-sm-12 col-md-4 post-box">
-        <div class="postUser">🧍 Username</div>
-        <div>
-          <img
-            class="postImg"
-            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-            alt=""
-          />
-        </div>
-        <div>
-          <span class="postIcons">♡</span>
-          <span class="postIcons">💬</span>
-          <span class="postIcons">✈</span>
+          <!-- picModal -->
+          <div
+            class="modal fade"
+            id="picModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="picModalTitle"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">🧍 Username</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <img
+                    class="postImg"
+                    src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                    alt
+                  />
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+            <!-- . -->
+          </div>
+          <button type="button" class="btn btn-danger">Like</button>
+          <!--Comment Modal-->
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#exampleModal"
+          >Comments</button>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Comments</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">...</div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- . -->
+
         </div>
       </div>
     </div>
@@ -128,5 +134,18 @@ export default {
   width: 100%;
   height: auto;
   border-radius: 100%;
+}
+
+@media (min-width: 750px) {
+  .imgHover:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+}
+
+@media (max-width: 750px) {
+  #picModal {
+    opacity: 1;
+  }
 }
 </style>
