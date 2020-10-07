@@ -1,15 +1,25 @@
 <template>
   <div class="container">
-    <h1>FEED</h1>
-    <p v-for="photo in photos" :key="photo.photo_id">
-      <b>User: {{photo.user_id}}</b>
-      <br>
-      <img :src="photo.photo_src" alt="">
-      <br>
-      Description: {{photo.description}}
-      <br>
-      Likes: {{photo.likes}}
-    </p>
+    <!-- ... -->
+    <div class="row posts">
+      <div class="col-sm-12 col-md-4 post-box" v-for="photo in photos" :key="photo.photo_id">
+        <div class="postUser">:D {{photo.user_id}}</div>
+        <div>
+          <img
+            class="postImg imgHover"
+            :src="photo.photo_src"
+            alt
+            data-toggle="modal"
+            data-target="#picModal"
+          />
+          <button type="button" class="btn btn-danger">Likes: {{photo.likes}}</button>
+          <button type="button" class="btn btn-primary">Comments</button>
+          <div>
+            "{{photo.description}}"
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -18,7 +28,7 @@ export default {
   name: "test",
   data() {
     return {
-      photos: []
+      photos: [],
     };
   },
   mounted: function () {
@@ -31,10 +41,24 @@ export default {
       .then((jsonBody) => {
         this.photos = jsonBody;
       });
-  }
+  },
 };
 </script>
 
 <style scoped>
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+}
 
+.post-box {
+  border: gray 1px solid;
+  border-radius: 4px;
+  padding: 2%;
+}
+
+.postImg {
+  width: 100%;
+  height: 500px;
+}
 </style>
