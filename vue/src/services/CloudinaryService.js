@@ -3,6 +3,7 @@
 
 const CLOUDINARY_ULR = 'https://api.cloudinary.com/v1_1/dtotytpog/image/upload';
 const CLOUDINARY_UPLOAD_PRESET = 'lvizruov';
+ 
 
 
 export default {
