@@ -10,10 +10,19 @@ public class Comment {
 	private int likes;
 	private String text;
 	// Date?
-	private Date timestamp;
+	private Date datetime;
 	
 
 	
+	public Comment(int comment_id, int likes, String text, int photo_id, int user_id, Date datetime) {
+		super();
+		this.comment_id = comment_id;
+		this.likes = likes;
+		this.text = text;
+		this.photo_id = photo_id;
+		this.user_id = user_id;
+		this.datetime =datetime;
+	}
 	public int getUser_id() {
 		return user_id;
 	}
@@ -29,8 +38,8 @@ public class Comment {
 	public String getText() {
 		return text;
 	}
-	public Date getTimestamp() {
-		return timestamp;
+	public Date getDatetime() {
+		return datetime;
 	}
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
@@ -47,7 +56,7 @@ public class Comment {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public void setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
+	public void setDatetime(Date datetime) {
+		this.datetime = datetime;
 	}
 }
