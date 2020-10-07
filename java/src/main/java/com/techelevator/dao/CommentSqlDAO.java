@@ -38,21 +38,19 @@ public class CommentSqlDAO implements CommentDAO {
 		boolean commentAdded = false;
 
 		// add comment
-		String insertComment = "INSERT INTO comments (likes, text, photo_id, timestamp) VALUES(?,?,?,?)";
+		String insertComment = "INSERT INTO comments (likes, text, photo_id, user_id, datetime) VALUES(?,?,?,?,?)";
 
 		commentAdded = jdbcTemplate.update(insertComment, comment.getLikes(), comment.getText(), comment.getPhoto_id(),
-				comment.getTimestamp()) == 1;
+				comment.getUser_id(), comment.getDatetime()) == 1;
 
 		return commentAdded;
 	}
 
 	@Override
-	public boolean deleteComment(int commentId, Comment comment) {
-		boolean commentDeleted = false;
+	public void deleteComment(int commentId) {
 
 		String sqlDelete = "DELETE FROM comments WHERE comment_id = ?";
-		commentDeleted = jdbcTemplate.update(sqlDelete, comment.getComment_id()) == 1;
-		return commentDeleted;
+		jdbcTemplate.update(sqlDelete, commentId);
 	}
 
 	@Override
@@ -63,7 +61,7 @@ public class CommentSqlDAO implements CommentDAO {
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sqlSelect, photoId);
 
 		while (result.next()) {
-			Comment comment = new Comment();
+			Comment comment = mapRowToComment(result);
 
 			allCommentsByPhotoId.add(comment);
 		}
@@ -83,14 +81,13 @@ public class CommentSqlDAO implements CommentDAO {
 	
 
 	private Comment mapRowToComment(SqlRowSet rs) {
-		Comment comment = new Comment();
+		Comment comment = new Comment(0, 0, null, 0, 0, null);
 		comment.setComment_id(rs.getInt("comment_id"));
 		comment.setText(rs.getString("text"));
 		comment.setLikes(rs.getInt("likes"));
 		comment.setPhoto_id(rs.getInt("photo_id"));
-		comment.setTimestamp(rs.getTimestamp("datetime"));
+		comment.setDatetime(rs.getTimestamp("datetime"));
 		comment.setUser_id(rs.getInt("user_id"));
-		comment.setPhoto_id((rs.getInt("photo_id")));
 
 		return comment;
 	}

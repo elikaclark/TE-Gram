@@ -10,7 +10,7 @@ public interface CommentDAO {
 	
 	public boolean addComment(Comment comment);
 	
-	public boolean deleteComment(int commentId, Comment comment);
+	public void deleteComment(int commentId);
 	
 	public List<Comment> getAllCommentsByPhotoId(int photoId);
 	
