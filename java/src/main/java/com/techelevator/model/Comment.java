@@ -12,6 +12,8 @@ public class Comment {
 	// Date?
 	private Date timestamp;
 	
+
+	
 	public int getUser_id() {
 		return user_id;
 	}

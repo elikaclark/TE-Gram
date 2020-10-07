@@ -100,12 +100,15 @@
             </div>
           </div>
           <!-- . -->
+<<<<<<< HEAD
           <!-- image upload code -->
           <form @submit.prevent='uploadImage($event)' @change='checkImageStatus($event)'>
             <input type='file' id='file-upload' name='filename'>
             <button type='submit' :disabled='!ready'>Upload</button>
             <img v-bind:src="output_src">
           </form>
+=======
+>>>>>>> 59ac5d3d88e6d71e94ce3b7d95f4b25df3d0206d
         </div>
       </div>
     </div>

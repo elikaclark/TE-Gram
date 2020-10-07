@@ -2,7 +2,7 @@
   <div class="home">
     <h1>Home</h1>
     <p>You must be authenticated to see this</p>
-    <p>{{holder}}</p>
+    <p>{{holder[1]}}</p>
   </div>
 </template>
 
