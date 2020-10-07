@@ -10,7 +10,17 @@ public class Photo {
 	private String description;
 	private String photo_src;
 	// Date?
-	private Date timestamp;
+	private Date datetime;
+//	
+//	public Photo (int photo_id, int user_id, int likes, String description, String photo_src, Date datetime) {
+//		this.photo_id = photo_id;
+//		this.user_id = user_id;
+//		this.likes = likes;
+//		this.description = description;
+//		this.photo_src = photo_src;
+//		this.datetime = datetime;
+//		
+//	}
 
 	public int getPhoto_id() {
 		return photo_id;
@@ -29,7 +39,7 @@ public class Photo {
 	}
 
 	public Date getTimestamp() {
-		return timestamp;
+		return datetime;
 	}
 
 	public int getUser_id() {
@@ -52,8 +62,8 @@ public class Photo {
 		this.likes = likes;
 	}
 
-	public void setTimestamp(Date timestamp) {
-		this.timestamp = timestamp;
+	public void setTimestamp(Date datetime) {
+		this.datetime = datetime;
 	}
 
 	public void setUser_id(int user_id) {

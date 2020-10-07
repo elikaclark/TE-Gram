@@ -2,7 +2,6 @@ package com.techelevator.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,27 +33,38 @@ public class PhotoController {
 		return allPhotos;
 	}
 	
-	@RequestMapping(path = "/photos/{id}", method = RequestMethod.GET)
+	@RequestMapping(path = "/photos/users/{id}", method = RequestMethod.GET)
 	public List<Photo> returnPhotoByUserId(@PathVariable("id") int user_id ){
 		List<Photo> allUsersPhotos = photoDAO.getPhotoByUserId(user_id);
 		
 		return allUsersPhotos;
 		
 	}
+	
+	@RequestMapping(path = "/photos/{photo_id}", method = RequestMethod.GET)
+	public Photo returnPhotoById(@PathVariable("photo_id") int photo_id ){
+		Photo allPhotos = photoDAO.getPhotoById(photo_id);
+		
+		return allPhotos;
+		
+	}
 
 	@ResponseStatus(HttpStatus.CREATED)
-	@RequestMapping (value = "" , method = RequestMethod.POST)
-	public void  addNewPhoto(@RequestBody Photo newPhoto) {
-		if (newPhoto != null) {
-			photoDAO.addPhoto(newPhoto);
-		}
+	@RequestMapping (path = "/addPhoto" , method = RequestMethod.POST)
+	public void  addNewPhoto(@RequestBody Photo photo) {
+		
+			photoDAO.addPhoto(photo);
+
 		
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@RequestMapping(value = "/photos/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(path = "/photos/{photo_id}", method = RequestMethod.DELETE)
 	public void deletePhoto( @PathVariable int photo_id) {
+		if(photoDAO.getPhotoById(photo_id) != null) {
 			photoDAO.deletePhoto(photo_id);
+		}
+			
 	}
 	
 }
