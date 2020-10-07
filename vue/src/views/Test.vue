@@ -1,14 +1,12 @@
 <template>
   <div class="container">
-    <h1>FEED</h1>
-    <p v-for="photo in photos" :key="photo.photo_id">
-      <b>User: {{photo.user_id}}</b>
+    <h1>All Comments</h1>
+    <p v-for="comment in comments" :key="comment.comment_id">
+      User: {{comment.user_id}}
+      <br/>
+      "{{comment.text}}"
       <br>
-      <img :src="photo.photo_src" alt="">
-      <br>
-      Description: {{photo.description}}
-      <br>
-      Likes: {{photo.likes}}
+      {{comment.timestamp}}
     </p>
   </div>
 </template>
@@ -18,19 +16,22 @@ export default {
   name: "test",
   data() {
     return {
-      photos: []
+      comments: []
     };
   },
   mounted: function () {
-    fetch("http://localhost:8080/photos", {
+    fetch("http://localhost:8080/comments", {
       method: "get",
     })
       .then((response) => {
         return response.json();
       })
       .then((jsonBody) => {
-        this.photos = jsonBody;
+        this.comments = jsonBody;
       });
+  },
+  function () {
+    console.log("jello")
   }
 };
 </script>

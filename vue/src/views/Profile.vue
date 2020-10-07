@@ -100,7 +100,12 @@
             </div>
           </div>
           <!-- . -->
-
+          <!-- image upload code -->
+          <form @submit.prevent='uploadImage($event)' @change='checkImageStatus($event)'>
+            <input type='file' id='file-upload' name='filename'>
+            <button type='submit' :disabled='!ready'>Upload</button>
+            <img v-bind:src="output_src">
+          </form>
         </div>
       </div>
     </div>
@@ -108,8 +113,42 @@
 </template>
 
 <script>
+import CloudinaryService from '@/services/CloudinaryService';
+
 export default {
   name: "profile",
+  data(){
+    return {
+      ready: false,
+      data_url: '',
+      output_src: '',
+    }
+  },
+  methods: {
+    checkImageStatus(evt){
+      const fileName = evt.target.files[0];   
+      const reader = new FileReader();   
+
+      reader.readAsDataURL(fileName);
+      reader.onload = () =>{
+        this.data_url = reader.result;
+        this.output_src = this.data_url;
+        this.ready = true;
+      }
+
+    },
+    uploadImage(){     
+      const formData = new FormData();
+
+      formData.append('file', this.data_url);
+      CloudinaryService.newImage(formData).then(response =>{
+        console.log(response);
+      }).catch(err =>{
+        console.log(err)
+      });
+
+    },
+  }
 };
 </script>
 
