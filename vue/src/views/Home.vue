@@ -2,9 +2,9 @@
   <div class="container">
     <h1>FEED</h1>
     <p v-for="photo in photos" :key="photo.photo_id">
-      User: {{photo.user_id}}
+      <b>User: {{photo.user_id}}</b>
       <br>
-      Photo: {{photo.photo_src}}
+      <img :src="photo.photo_src" alt="">
       <br>
       Description: {{photo.description}}
       <br>
