@@ -13,6 +13,8 @@ public interface PhotoDAO {
 	public void deletePhoto(int photo_id);
 	public List<Photo>  getPhotoByUserId(int user_id);
 	public Photo getProfilePic(int user_id);
+	public Photo getPhotoById(int photo_id);
+
 	
 	
 	
