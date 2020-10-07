@@ -5,12 +5,10 @@
         <img
           class="loginPic"
           src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80"
-          alt=""
+          alt
         />
       </div>
-      <div
-        class="form-box col-sm-12 col-lg-6 d-flex justify-content-center align-items-center"
-      >
+      <div class="form-box col-sm-12 col-lg-6 d-flex justify-content-center align-items-center">
         <div id="login" class="text-center">
           <form class="form-signin" @submit.prevent="login">
             <h1>☕ TE Gram</h1>
@@ -19,16 +17,12 @@
               class="alert alert-danger"
               role="alert"
               v-if="invalidCredentials"
-            >
-              Invalid username and password!
-            </div>
+            >Invalid username and password!</div>
             <div
               class="alert alert-success"
               role="alert"
               v-if="this.$route.query.registration"
-            >
-              Thank you for registering, please sign in.
-            </div>
+            >Thank you for registering, please sign in.</div>
             <div class="d-flex justify-content-center inputBox">
               <label for="username" class="sr-only">Username</label>
               <input
@@ -52,12 +46,8 @@
                 required
               />
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">
-              Sign in
-            </button>
-            <router-link :to="{ name: 'register' }">
-              Need an account?</router-link
-            >
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <router-link :to="{ name: 'register' }">Need an account?</router-link>
           </form>
         </div>
       </div>
