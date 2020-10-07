@@ -154,7 +154,7 @@ export default {
 }
 
 .row {
-  margin-top: 0%;
+  margin-top: 7%;
 }
 
 @media (max-width: 575px) {
