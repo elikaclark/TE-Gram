@@ -9,8 +9,8 @@ import com.techelevator.model.Photo;
 public interface PhotoDAO {
 	
 	public List<Photo> findAllPhotos();
-	public boolean addPhoto(Photo photo);
-	public boolean deletePhoto(Photo photo);
+	public void addPhoto(Photo photo);
+	public void deletePhoto(int photo_id);
 	public List<Photo>  getPhotoByUserId(int user_id);
 	public Photo getProfilePic(int user_id);
 	
