@@ -28,10 +28,10 @@
         >
           <ul class="navbar-nav text-right">
             <li class="nav-item active">
-              <router-link v-bind:to="{ name: '#' }">Profile</router-link>
+              <router-link v-bind:to="{ name: 'profile' }">Profile</router-link>
             </li>
             <li class="nav-item active">
-              <router-link v-bind:to="{ name: '#' }">Favorites</router-link>
+              <router-link v-bind:to="{ name: 'Favorites' }">Favorites</router-link>
             </li>
           </ul>
         </div>
@@ -40,7 +40,6 @@
       <br>
       <br>
     </div>
-
     <router-view />
   </div>
 </template>

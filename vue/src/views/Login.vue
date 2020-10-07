@@ -1,6 +1,6 @@
 <template>
   <div class="container main">
-    <div class="row">
+    <div class="row double-box">
       <div class="col-sm-12 col-lg-6 picBox">
         <img
           class="loginPic"
@@ -151,6 +151,10 @@ export default {
     display: none;
     order: 2;
   }
+}
+
+.row {
+  margin-top: 0%;
 }
 
 @media (max-width: 575px) {
