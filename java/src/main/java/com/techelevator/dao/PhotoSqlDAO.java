@@ -91,7 +91,7 @@ public class PhotoSqlDAO implements PhotoDAO {
 		for (int i =0 ; i < commentsByPhotoId.size(); i++) {
 			try {
 				System.out.println(commentsByPhotoId.get(i));
-				commentDao.deleteComment(commentsByPhotoId.get(i).getComment_id(), commentsByPhotoId.get(i));
+				commentDao.deleteComment(commentsByPhotoId.get(i).getComment_id());
 			} catch(Exception e) {
 				System.out.println(e);
 			}

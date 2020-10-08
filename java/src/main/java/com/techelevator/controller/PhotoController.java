@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import com.techelevator.dao.PhotoDAO;
 import com.techelevator.model.Photo;
 
 @RestController
-
+@CrossOrigin
 public class PhotoController {
 	
 	@Autowired
@@ -51,9 +52,9 @@ public class PhotoController {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping (path = "/addPhoto" , method = RequestMethod.POST)
-	public void  addNewPhoto(@RequestBody Photo photo) {
+	public void  addNewPhoto(@RequestBody Photo newPhoto) {
 		
-			photoDAO.addPhoto(photo);
+			photoDAO.addPhoto(newPhoto);
 
 		
 	}
