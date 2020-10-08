@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techelevator.model.Photo;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.techelevator.model.UserToFavorite;
@@ -34,8 +35,9 @@ public class UserToFavoriteSqlDAO implements UserToFavoriteDAO {
 	}
 
 	@Override
-	public List<UserToFavorite> getAllUserFavorites(Long userId) {
+	public List<Photo> getAllUserFavorites(Long userId) {
 		List<UserToFavorite> allFavoritesByUser = new ArrayList<>();
+		List<Photo> userFavPhotos = new ArrayList<>();
 
 		String sqlSelect = "Select * from UserToFavorite where user_id = ? ";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sqlSelect, userId);
@@ -47,7 +49,16 @@ public class UserToFavoriteSqlDAO implements UserToFavoriteDAO {
 
 			allFavoritesByUser.add(fav);
 		}
-		return allFavoritesByUser;
+
+
+		PhotoSqlDAO photoDao = new PhotoSqlDAO(jdbcTemplate);
+		allFavoritesByUser.forEach(UserToFavorite ->{
+			Photo favPhoto =  photoDao.getPhotoById(UserToFavorite.getPhoto_id().intValue());
+			userFavPhotos.add(favPhoto);
+		});
+
+
+		return userFavPhotos;
 	}
 
 	@Override

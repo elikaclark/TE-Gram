@@ -40,9 +40,8 @@ public class PhotoSqlDAO implements PhotoDAO {
 		String sql = "SELECT * FROM photos WHERE photo_id = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, photo_id);
 		Photo photo = null;
-		while(results.next()) {
-			Photo photo1 = mapRowToPhoto(results) ;
-			return photo1;
+		if(results.next()) {
+			photo = mapRowToPhoto(results) ;
 		}
 		return photo;
 	}
