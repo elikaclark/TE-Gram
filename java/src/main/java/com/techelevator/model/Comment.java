@@ -13,15 +13,16 @@ public class Comment {
 	private Date datetime;
 	
 
+	public Comment(){}
 	
-	public Comment(int comment_id, int likes, String text, int photo_id, int user_id, Date datetime) {
+	public Comment(int comment_id, int likes, String text, int photo_id, int user_id) {
 		super();
 		this.comment_id = comment_id;
 		this.likes = likes;
 		this.text = text;
 		this.photo_id = photo_id;
 		this.user_id = user_id;
-		this.datetime =datetime;
+//		this.datetime =datetime;
 	}
 	public int getUser_id() {
 		return user_id;

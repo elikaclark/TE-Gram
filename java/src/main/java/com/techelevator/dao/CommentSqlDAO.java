@@ -38,10 +38,10 @@ public class CommentSqlDAO implements CommentDAO {
 		boolean commentAdded = false;
 
 		// add comment
-		String insertComment = "INSERT INTO comments (likes, text, photo_id, user_id, datetime) VALUES(?,?,?,?,?)";
+		String insertComment = "INSERT INTO comments (likes, text, photo_id, user_id, datetime) VALUES(?,?,?,?,current_timestamp)";
 
 		commentAdded = jdbcTemplate.update(insertComment, comment.getLikes(), comment.getText(), comment.getPhoto_id(),
-				comment.getUser_id(), comment.getDatetime()) == 1;
+				comment.getUser_id()) == 1;
 
 		return commentAdded;
 	}
@@ -81,7 +81,7 @@ public class CommentSqlDAO implements CommentDAO {
 	
 
 	private Comment mapRowToComment(SqlRowSet rs) {
-		Comment comment = new Comment(0, 0, null, 0, 0, null);
+		Comment comment = new Comment();
 		comment.setComment_id(rs.getInt("comment_id"));
 		comment.setText(rs.getString("text"));
 		comment.setLikes(rs.getInt("likes"));

@@ -36,7 +36,7 @@ public class CommentController {
 	}
 	
 	@ResponseStatus(HttpStatus.CREATED)
-	@RequestMapping(value = "", method = RequestMethod.POST)
+	@RequestMapping(path = "/addComment", method = RequestMethod.POST)
 	public void addNewComment(@Valid @RequestBody Comment newComment) {
 		commentDAO.addComment(newComment);
 	}

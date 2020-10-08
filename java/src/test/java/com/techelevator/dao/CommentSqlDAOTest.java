@@ -63,7 +63,7 @@ public class CommentSqlDAOTest extends DAOIntegrationTest {
 		List<Comment> allComBefore = commentSqlDAO.findAll();
 		
 		Date date = new Date();
-		Comment temp = new Comment(1, 0, "test", 1, 1, date);
+		Comment temp = new Comment(1, 0, "test", 1, 1);
 		commentSqlDAO.addComment(temp);
 		List<Comment> allComAfter = commentSqlDAO.findAll();
 
@@ -74,7 +74,7 @@ public class CommentSqlDAOTest extends DAOIntegrationTest {
 	public void getAllCommentsByPhotoId() {
 		List<Comment> allComByPhotoBefore = commentSqlDAO.getAllCommentsByPhotoId(4);
 		Date date = new Date();
-		Comment temp = new Comment(4, 4, "test", 4, 4, date);
+		Comment temp = new Comment(4, 4, "test", 4, 4);
 
 		commentSqlDAO.addComment(temp);
 		List<Comment> allComByPhotoAfter = commentSqlDAO.getAllCommentsByPhotoId(4);
@@ -87,7 +87,7 @@ public class CommentSqlDAOTest extends DAOIntegrationTest {
 		List<Comment> allComBefore = commentSqlDAO.findAll();
 
 		Date date = new Date();
-		Comment temp = new Comment(1, 1, "test", 1, 1, date);
+		Comment temp = new Comment(1, 1, "test", 1, 1);
 		commentSqlDAO.addComment(temp);
 
 		List<Comment> allComAfter = commentSqlDAO.findAll();
@@ -99,7 +99,7 @@ public class CommentSqlDAOTest extends DAOIntegrationTest {
 	public void deleteComment() {
 		List<Comment> allComBefore = commentSqlDAO.findAll();
 
-		Comment temp = new Comment(1, 0, null, 0, 0, null);
+		Comment temp = new Comment(1, 0, null, 0, 0);
 		commentSqlDAO.deleteComment(1);
 
 		List<Comment> allComAfter = commentSqlDAO.findAll();
