@@ -55,6 +55,13 @@ public class PhotoController {
 			photoDAO.addPhoto(newPhoto);		
 	}
 	
+	
+	@RequestMapping(path="/editPhoto", method = RequestMethod.PUT)
+	public void editPhoto(@RequestBody Photo photo) {
+		
+		photoDAO.editPhoto(photo);
+	}
+	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@RequestMapping(path = "/photos/{photo_id}", method = RequestMethod.DELETE)
 	public void deletePhoto( @PathVariable int photo_id) {
@@ -63,6 +70,8 @@ public class PhotoController {
 		}
 			
 	}
+	
+	
 	
 }
 

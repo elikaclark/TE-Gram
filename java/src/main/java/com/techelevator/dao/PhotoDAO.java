@@ -14,6 +14,7 @@ public interface PhotoDAO {
 	public List<Photo>  getPhotoByUserId(int user_id);
 	public Photo getProfilePic(int user_id);
 	public Photo getPhotoById(int photo_id);
+	public void editPhoto(Photo photo);
 
 	
 	
