@@ -41,8 +41,11 @@ export default {
       const formData = new FormData();
 
       formData.append('file', this.data_url);
-      CloudinaryService.newImage(formData).then(response =>{
-        console.log(response);
+      CloudinaryService.newImage(formData).then(response => response.json())
+      .then(jsonData =>{
+        if(jsonData.secure_url !== ''){
+          console.log(jsonData.secure_url);
+        }
       }).catch(err =>{
         console.log(err)
       });
