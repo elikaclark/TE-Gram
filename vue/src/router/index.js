@@ -10,6 +10,7 @@ import Register from '../views/Register.vue'
 import Profile from '../views/Profile.vue'
 import Upload from '../views/Upload.vue'
 import Test from '../views/Test.vue'
+import Favorites from '../views/Favorite.vue'
 
 Vue.use(Router)
 
@@ -78,6 +79,14 @@ const router = new Router({
       path: '/test',
       name: 'test',
       component: Test,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/favorites',
+      name: 'favorites',
+      component: Favorites,
       meta: {
         requiresAuth: true
       }

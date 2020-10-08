@@ -1,15 +1,12 @@
 <template>
   <div id="app">
-    <div class="container">
-      <img style="width: 100%" v-bind:src="output_src" alt />
-    </div>
     <!-- image upload code -->
     <form @submit.prevent="uploadImage($event)" @change="checkImageStatus($event)">
       <input type="file" id="file-upload" name="filename" />
       <button type="submit" :disabled="!ready">Upload</button>
       <!-- <img v-bind:src="output_src"> -->
       <input v-model="description" type="text" name id />
-      <button @click="saveUpload()" type="submit">FULL SEND</button>
+      <button @click="editUpload()" type="submit">Confirm Changes</button>
     </form>
   </div>
 </template>
@@ -23,8 +20,7 @@ export default {
     return {
       ready: false,
       data_url: "",
-      output_src:
-        "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
+      output_src: "",
       description: "",
       upload_src: "",
     };
@@ -57,7 +53,7 @@ export default {
           console.log(err);
         });
     },
-    saveUpload() {
+    editUpload() {
       fetch("http://localhost:8080/addPhoto/", {
         method: "post",
         headers: {
@@ -68,11 +64,12 @@ export default {
           description: this.description,
           photo_src: this.upload_src,
           likes: 1,
-          user_id: 3,
+          user_id: this.$store.state.user.id,
           profile: false,
         }),
       }).then((response) => {
         console.log(response);
+        window.location.reload();
       });
     },
   },

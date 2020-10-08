@@ -69,7 +69,7 @@ export default {
           description: this.description,
           photo_src: this.upload_src,
           likes: 1,
-          user_id: 3,
+          user_id: this.$store.state.user.id,
           profile: false,
         }),
       }).then((response) => {

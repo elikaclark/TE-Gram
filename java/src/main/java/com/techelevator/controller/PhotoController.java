@@ -37,7 +37,6 @@ public class PhotoController {
 	@RequestMapping(path = "/photos/users/{id}", method = RequestMethod.GET)
 	public List<Photo> returnPhotoByUserId(@PathVariable("id") int user_id ){
 		List<Photo> allUsersPhotos = photoDAO.getPhotoByUserId(user_id);
-		
 		return allUsersPhotos;
 		
 	}

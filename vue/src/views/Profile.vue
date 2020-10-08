@@ -23,21 +23,23 @@
         </div>
       </div>
     </header>
-    <div class="row posts">
-      <div class="col-sm-12 col-md-4 post-box">
-        <div class="postUser">🧍 Username</div>
+    <!-- Post -->
+    <div class="row posts" >
+      <div class="col-sm-12 col-md-4 post-box" v-for="post in posts" v-bind:key="post.photo_id">
+        <div class="postUser">🧍 {{post.user_id}}</div>
         <div>
           <img
             class="postImg imgHover"
-            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+            :src="post.photo_src"
             alt
             data-toggle="modal"
-            data-target="#picModal"
+            :data-target="'#'+'picModal'+post.photo_id"
           />
+          <br />
           <!-- picModal -->
           <div
             class="modal fade"
-            id="picModal"
+            :id="'picModal' + post.photo_id"
             tabindex="-1"
             role="dialog"
             aria-labelledby="picModalTitle"
@@ -46,17 +48,14 @@
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">🧍 Username</h5>
+                  <h5 class="modal-title" id="exampleModalLongTitle">🧍 {{post.user_id}}</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
-                  <img
-                    class="postImg"
-                    src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                    alt
-                  />
+                  <img class="postImg" :src="post.photo_src" alt />
+                  {{post.description}}
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -104,13 +103,14 @@
             type="button"
             class="btn btn-warning"
             data-toggle="modal"
-            data-target="#editModal"
+            :data-target="'#'+'editModal'+post.photo_id"
           >Edit</button>
-
+          <br />
+          {{post.description}}
           <!-- Modal -->
           <div
             class="modal fade"
-            id="editModal"
+            :id="'editModal'+post.photo_id"
             tabindex="-1"
             role="dialog"
             aria-labelledby="editModalLabel"
@@ -124,10 +124,13 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body"><Edit/></div>
+                <div class="modal-body">
+                  <img :src="post.photo_src" style="width:100%"/>
+                  <Edit />
+                  <button @click="deleteUpload(post.photo_id)" type="submit">DELETE POST</button>
+                </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
               </div>
             </div>
@@ -140,15 +143,28 @@
 
 <script>
 import CloudinaryService from "@/services/CloudinaryService";
-import Edit from "../components/Edit"
+import Edit from "../components/Edit";
 
 export default {
   name: "profile",
+  mounted: function () {
+    var url = "http://localhost:8080/photos/users/" + this.$store.state.user.id;
+    fetch(url, {
+      method: "get",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((jsonBody) => {
+        this.posts = jsonBody;
+      });
+  },
   components: {
-    Edit
+    Edit,
   },
   data() {
     return {
+      posts: "",
       ready: false,
       data_url: "",
       output_src: "",
@@ -180,6 +196,13 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    deleteUpload(id) {
+      var url = "http://localhost:8080/photos/" + id;
+      fetch(url, {
+        method: "delete",
+      });
+      window.location.reload();
     },
   },
 };
