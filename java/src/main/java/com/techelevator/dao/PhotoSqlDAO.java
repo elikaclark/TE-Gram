@@ -65,8 +65,8 @@ public class PhotoSqlDAO implements PhotoDAO {
 	public void addPhoto(Photo photo) {
 		boolean photoAdded = false;
 
-		String insertPhoto = "INSERT INTO photos ( description, photo_src, likes, datetime, user_id) values(?,?,?,?,?)";
-		photoAdded = jdbcTemplate.update(insertPhoto, photo.getDescription(), photo.getPhoto_src(), photo.getLikes(), photo.getTimestamp(), photo.getUser_id()) == 1;
+		String insertPhoto = "INSERT INTO photos ( description, photo_src, likes, datetime, user_id) values(?,?,?,current_timestamp,?)";
+		photoAdded = jdbcTemplate.update(insertPhoto, photo.getDescription(), photo.getPhoto_src(), photo.getLikes(), photo.getUser_id()) == 1;
 		
 
 	}

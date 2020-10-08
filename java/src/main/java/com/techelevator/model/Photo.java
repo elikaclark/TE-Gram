@@ -11,16 +11,16 @@ public class Photo {
 	private String photo_src;
 	// Date?
 	private Date datetime;
-//	
-//	public Photo (int photo_id, int user_id, int likes, String description, String photo_src, Date datetime) {
-//		this.photo_id = photo_id;
-//		this.user_id = user_id;
-//		this.likes = likes;
-//		this.description = description;
-//		this.photo_src = photo_src;
-//		this.datetime = datetime;
-//		
-//	}
+
+	public Photo(){};
+
+	public Photo (int photo_id, int user_id, int likes, String description, String photo_src) {
+		this.photo_id = photo_id;
+		this.user_id = user_id;
+		this.likes = likes;
+		this.description = description;
+		this.photo_src = photo_src;
+	}
 
 	public int getPhoto_id() {
 		return photo_id;
