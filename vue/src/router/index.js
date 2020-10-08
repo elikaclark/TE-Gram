@@ -10,6 +10,7 @@ import Register from '../views/Register.vue'
 import Profile from '../views/Profile.vue'
 import Upload from '../views/Upload.vue'
 import Test from '../views/Test.vue'
+import Comment from "../views/Comment.vue"
 
 Vue.use(Router)
 
@@ -82,6 +83,15 @@ const router = new Router({
         requiresAuth: true
       }
     },
+    {
+      path: '/addComment',
+      name: 'add-comment',
+      component: Comment,
+      meta: {
+        requiresAuth: true
+
+    }
+  }
   ]
 })
 

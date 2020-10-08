@@ -7,6 +7,7 @@
       "{{comment.text}}"
       <br>
       {{comment.timestamp}}
+       <button @click="deleteComment(comment.comment_id)">Delete Comment</button>
     </p>
   </div>
 </template>
@@ -14,6 +15,15 @@
 <script>
 export default {
   name: "test",
+  methods: {
+ deleteComment(id){
+   var url = "http://localhost:8080/comments/" + id;
+       fetch ((url),  {
+           method: "delete"
+
+       })
+    }
+  },
   data() {
     return {
       comments: []
