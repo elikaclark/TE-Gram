@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    {{upload_src}}
     <div class="container">
-      <img v-bind:src="output_src" alt />
+      <img style="width: 100%" v-bind:src="output_src" alt />
     </div>
     <!-- image upload code -->
     <form @submit.prevent="uploadImage($event)" @change="checkImageStatus($event)">
@@ -19,13 +18,13 @@
 import CloudinaryService from "@/services/CloudinaryService";
 
 export default {
-  name: "upload",
+  name: "edit",
   data() {
     return {
       ready: false,
       data_url: "",
       output_src:
-        "https://images.unsplash.com/photo-1534278931827-8a259344abe7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+        "https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
       description: "",
       upload_src: "",
     };
@@ -80,8 +79,5 @@ export default {
 };
 </script>
 
-<style scoped>
-img {
-  width: 100%;
-}
+<style>
 </style>

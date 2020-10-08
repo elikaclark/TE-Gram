@@ -100,12 +100,38 @@
             </div>
           </div>
           <!-- . -->
-          <!-- image upload code -->
-          <form @submit.prevent='uploadImage($event)' @change='checkImageStatus($event)'>
-            <input type='file' id='file-upload' name='filename'>
-            <button type='submit' :disabled='!ready'>Upload</button>
-            <img v-bind:src="output_src">
-          </form>
+          <button
+            type="button"
+            class="btn btn-warning"
+            data-toggle="modal"
+            data-target="#editModal"
+          >Edit</button>
+
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="editModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="editModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="editModalLabel">Edit</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body"><Edit/></div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -113,45 +139,49 @@
 </template>
 
 <script>
-import CloudinaryService from '@/services/CloudinaryService';
+import CloudinaryService from "@/services/CloudinaryService";
+import Edit from "../components/Edit"
 
 export default {
   name: "profile",
-  data(){
+  components: {
+    Edit
+  },
+  data() {
     return {
       ready: false,
-      data_url: '',
-      output_src: '',
-    }
+      data_url: "",
+      output_src: "",
+    };
   },
   methods: {
-    checkImageStatus(evt){
-      const fileName = evt.target.files[0];   
-      const reader = new FileReader();   
+    checkImageStatus(evt) {
+      const fileName = evt.target.files[0];
+      const reader = new FileReader();
 
       reader.readAsDataURL(fileName);
-      reader.onload = () =>{
+      reader.onload = () => {
         this.data_url = reader.result;
         this.output_src = this.data_url;
         this.ready = true;
-      }
-
+      };
     },
-    uploadImage(){     
+    uploadImage() {
       const formData = new FormData();
 
-      formData.append('file', this.data_url);
-      CloudinaryService.newImage(formData).then(response => response.json())
-      .then(jsonData =>{
-        if(jsonData.secure_url !== ''){
-          console.log(jsonData.secure_url); 
-        }
-      }).catch(err =>{
-        console.log(err)
-      });
-
+      formData.append("file", this.data_url);
+      CloudinaryService.newImage(formData)
+        .then((response) => response.json())
+        .then((jsonData) => {
+          if (jsonData.secure_url !== "") {
+            console.log(jsonData.secure_url);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-  }
+  },
 };
 </script>
 
