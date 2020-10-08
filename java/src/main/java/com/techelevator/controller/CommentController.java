@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.techelevator.dao.CommentDAO;
 import com.techelevator.model.Comment;
+import com.techelevator.model.Photo;
 
 @RestController
 @CrossOrigin
@@ -46,6 +47,12 @@ public class CommentController {
     Comment commentById = commentDAO.getCommentById(comment_id);
     return commentById;
     }
+    
+    @RequestMapping(path="/editComment", method = RequestMethod.PUT)
+	public void editComment(@RequestBody Comment comment) {
+		commentDAO.editComment(comment);
+	}
+	
     
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@RequestMapping(value = "/comments/{id}", method = RequestMethod.DELETE)

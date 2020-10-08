@@ -15,4 +15,6 @@ public interface CommentDAO {
 	public List<Comment> getAllCommentsByPhotoId(int photoId);
 	
 	public Comment getCommentById(int commentId);
+	
+	public void editComment(Comment comment);
  }

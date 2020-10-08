@@ -8,7 +8,6 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
 
 import com.techelevator.model.Comment;
-import com.techelevator.model.UserToFavorite;
 
 @Service
 public class CommentSqlDAO implements CommentDAO {
@@ -79,6 +78,13 @@ public class CommentSqlDAO implements CommentDAO {
 		}
 	}
 	
+	@Override
+	public void editComment(Comment comment) {
+		String sqlUpdComment = "UPDATE comments SET text = ?, likes = ? WHERE comment_id =?";
+		jdbcTemplate.update(sqlUpdComment, comment.getText(), comment.getLikes(), comment.getComment_id() );
+		
+	}
+	
 
 	private Comment mapRowToComment(SqlRowSet rs) {
 		Comment comment = new Comment();
@@ -91,5 +97,6 @@ public class CommentSqlDAO implements CommentDAO {
 
 		return comment;
 	}
+
 
 }
