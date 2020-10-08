@@ -52,10 +52,7 @@ public class PhotoController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@RequestMapping (path = "/addPhoto" , method = RequestMethod.POST)
 	public void  addNewPhoto(@RequestBody Photo newPhoto) {
-		
-			photoDAO.addPhoto(newPhoto);
-
-		
+			photoDAO.addPhoto(newPhoto);		
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
