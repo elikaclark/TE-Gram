@@ -12,6 +12,11 @@ export default {
 
   register(user) {
     return http.post('/register', user)
-  }
+  },
 
+  computed: {
+    authenticatedUser() {
+      return this.$auth.authenticatedUser()
+    }
+  }
 }
