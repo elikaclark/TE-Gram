@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.techelevator.model.Photo;
+import com.techelevator.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.techelevator.model.UserToFavorite;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserToFavoriteSqlDAO implements UserToFavoriteDAO {
 
 	private JdbcTemplate jdbcTemplate;
@@ -32,6 +35,23 @@ public class UserToFavoriteSqlDAO implements UserToFavoriteDAO {
 			allFavorites.add(fav);
 		}
 		return allFavorites;
+	}
+
+	@Override
+	public List<UserToFavorite> getAllFavoritesByPhotoId(Long photoId) {
+		List<UserToFavorite> allFavoritesByPhotoId = new ArrayList<>();
+
+		String sqlSelect = "Select * from UserToFavorite where photo_id = ? ";
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sqlSelect, photoId);
+
+		while(result.next()){
+			UserToFavorite fav = new UserToFavorite();
+			fav.setUser_id(result.getLong("user_id"));
+			fav.setPhoto_id((result.getLong("photo_id")));
+
+			allFavoritesByPhotoId.add(fav);
+		}
+		return allFavoritesByPhotoId;
 	}
 
 	@Override
@@ -62,7 +82,7 @@ public class UserToFavoriteSqlDAO implements UserToFavoriteDAO {
 	}
 
 	@Override
-	public List<UserToFavorite> getAllFavoritesByPhotoId(Long photoId) {
+	public List<User> getAllUsersByPhotoId(Long photoId) {
 		List<UserToFavorite> allFavoritesByPhotoId = new ArrayList<>();
 
 		String sqlSelect = "Select * from UserToFavorite where photo_id = ? ";
@@ -75,7 +95,16 @@ public class UserToFavoriteSqlDAO implements UserToFavoriteDAO {
 
 			allFavoritesByPhotoId.add(fav);
 		}
-		return allFavoritesByPhotoId;
+
+		List<User> usersThatFavoriteThisPhoto = new ArrayList<>();
+		UserSqlDAO userDao = new UserSqlDAO(jdbcTemplate);
+
+		allFavoritesByPhotoId.forEach(UserToFavorite ->{
+			User usr = userDao.getUserById(UserToFavorite.getUser_id());
+			usersThatFavoriteThisPhoto.add(usr);
+		});
+
+		return usersThatFavoriteThisPhoto;
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Photo;
+import com.techelevator.model.User;
 import com.techelevator.model.UserToFavorite;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,12 +50,12 @@ public class UserToFavoriteSqlDAOTest extends DAOIntegrationTest{
     }
 
     @Test
-    public void getAllFavoritesByPhotoId() {
-        List<UserToFavorite> allFavByPhotoBefore = userToFavDao.getAllFavoritesByPhotoId(6L);
+    public void getAllUsersByPhotoId() {
+        List<User> allFavByPhotoBefore = userToFavDao.getAllUsersByPhotoId(6L);
         UserToFavorite temp = new UserToFavorite(3L, 6L);
 
         userToFavDao.addFavorite(temp);
-        List<UserToFavorite> allFavsByPhotoAfter = userToFavDao.getAllFavoritesByPhotoId(6L);
+        List<User> allFavsByPhotoAfter = userToFavDao.getAllUsersByPhotoId(6L);
 
         assertEquals(allFavByPhotoBefore.size() + 1, allFavsByPhotoAfter.size());
     }

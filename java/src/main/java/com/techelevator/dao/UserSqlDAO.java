@@ -91,6 +91,7 @@ public class UserSqlDAO implements UserDAO {
         User user = new User();
         user.setId(rs.getLong("user_id"));
         user.setUsername(rs.getString("username"));
+        user.setName(rs.getString("name"));
         user.setPassword(rs.getString("password_hash"));
         user.setAuthorities(rs.getString("role"));
         user.setActivated(true);
