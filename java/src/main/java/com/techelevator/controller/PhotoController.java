@@ -58,7 +58,6 @@ public class PhotoController {
 	
 	@RequestMapping(path="/editPhoto", method = RequestMethod.PUT)
 	public void editPhoto(@RequestBody Photo photo) {
-		
 		photoDAO.editPhoto(photo);
 	}
 	

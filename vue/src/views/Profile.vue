@@ -24,7 +24,7 @@
       </div>
     </header>
     <!-- Post -->
-    <div class="row posts" >
+    <div class="row posts">
       <div class="col-sm-12 col-md-4 post-box" v-for="post in posts" v-bind:key="post.photo_id">
         <div class="postUser">🧍 {{post.user_id}}</div>
         <div>
@@ -125,8 +125,8 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <img :src="post.photo_src" style="width:100%"/>
-                  <Edit />
+                  <img :src="post.photo_src" style="width:100%" />
+                  <Edit v-bind:postId="post.photo_id" />
                   <button @click="deleteUpload(post.photo_id)" type="submit">DELETE POST</button>
                 </div>
                 <div class="modal-footer">

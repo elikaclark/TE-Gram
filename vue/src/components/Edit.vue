@@ -1,12 +1,13 @@
 <template>
   <div id="app">
+    {{photo_id}}
     <!-- image upload code -->
     <form @submit.prevent="uploadImage($event)" @change="checkImageStatus($event)">
       <input type="file" id="file-upload" name="filename" />
       <button type="submit" :disabled="!ready">Upload</button>
       <!-- <img v-bind:src="output_src"> -->
       <input v-model="description" type="text" name id />
-      <button @click="editUpload()" type="submit">Confirm Changes</button>
+      <button @click.prevent="editUpload()" type="submit">Confirm Changes</button>
     </form>
   </div>
 </template>
@@ -16,11 +17,19 @@ import CloudinaryService from "@/services/CloudinaryService";
 
 export default {
   name: "edit",
+  mounted() {
+    this.photo_id = this.postId;
+  },
+  props: {
+    postId: Object
+  },
   data() {
     return {
       ready: false,
       data_url: "",
       output_src: "",
+
+      photo_id: "",
       description: "",
       upload_src: "",
     };
@@ -54,13 +63,14 @@ export default {
         });
     },
     editUpload() {
-      fetch("http://localhost:8080/addPhoto/", {
-        method: "post",
+      fetch("http://localhost:8080/editPhoto", {
+        method: "put",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          photo_id: this.photo_id,
           description: this.description,
           photo_src: this.upload_src,
           likes: 1,
