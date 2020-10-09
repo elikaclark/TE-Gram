@@ -1,9 +1,8 @@
 <template>
   <div class="container">
-    <!-- ... -->
     <div class="row posts">
       <div class="col-sm-12 col-md-4 post-box" v-for="photo in photos" :key="photo.photo_id">
-        <div class="postUser">:D {{photo.user_id}}</div>
+        <router-link :to="'/profile/'+photo.user_id"> -_- {{photo.user_id}} </router-link>
         <div>
           <img
             class="postImg imgHover"
@@ -39,7 +38,7 @@ export default {
         return response.json();
       })
       .then((jsonBody) => {
-        this.photos = jsonBody;
+        this.photos = jsonBody.reverse();
       });
   },
 };
