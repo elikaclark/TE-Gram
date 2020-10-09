@@ -7,6 +7,7 @@ DROP SEQUENCE IF EXISTS seq_photo_id;
 DROP TABLE IF EXISTS UserToFavorite;
 DROP TABLE IF EXISTS comments;
 DROP SEQUENCE IF EXISTS seq_comment_id;
+DROP TABLE IF EXISTS photo_to_likes;
 
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
@@ -48,6 +49,12 @@ CREATE TABLE photos(
     CONSTRAINT FK_user FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
+CREATE TABLE photo_to_likes(
+    photo_id int NOT NULL,
+    user_id int NOT NULL,
+    CONSTRAINT FK_photo FOREIGN KEY (photo_id) REFERENCES photos(photo_id),
+    CONSTRAINT FK_user FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
 
 CREATE TABLE UserToFavorite (
     user_id int NOT NULL,
@@ -81,17 +88,17 @@ INSERT INTO users (username, password_hash, role, name) values ('user3@email.com
 
 
 --PHOTOS
-INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data1', 'dummy src', 3, current_timestamp, 3);
-INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data2', 'dummy src', 2, current_timestamp, 3);
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data1', 'dummy src', 0, current_timestamp, 3);
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data2', 'dummy src', 0, current_timestamp, 3);
 INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data3', 'dummy src', 0, current_timestamp, 3);
 
-INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data4', 'dummy src', 6, current_timestamp, 4);
-INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data5', 'dummy src', 8, current_timestamp, 4);
-INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data6', 'dummy src', 1, current_timestamp, 4);
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data4', 'dummy src', 0, current_timestamp, 4);
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data5', 'dummy src', 0, current_timestamp, 4);
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data6', 'dummy src', 0, current_timestamp, 4);
 
-INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data7', 'dummy src', 1, current_timestamp, 5);
-INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data8', 'dummy src', 9, current_timestamp, 5);
-INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data9', 'dummy src', 5, current_timestamp, 5);
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data7', 'dummy src', 0, current_timestamp, 5);
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data8', 'dummy src', 0, current_timestamp, 5);
+INSERT INTO photos(description, photo_src, likes, datetime, user_id) VALUES ('Dummy data9', 'dummy src', 0, current_timestamp, 5);
 
 --USERSTOFAVORITES
 INSERT INTO UserToFavorite (user_id, photo_id) VALUES (3, 7);

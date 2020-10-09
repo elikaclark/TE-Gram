@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       photos: [],
-      userFavPhotos: [],
+      userFavPhotos: []
     };
   },
   methods: {
@@ -112,6 +112,7 @@ export default {
      params: { id: photoId } });
 
     }
+    
   },
   mounted: function () {
     fetch("http://localhost:8080/photos", {
