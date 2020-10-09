@@ -7,7 +7,6 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
-import Profile from '../views/Profile.vue'
 import Upload from '../views/Upload.vue'
 import Test from '../views/Test.vue'
 import Favorites from '../views/Favorite.vue'
@@ -41,14 +40,6 @@ const router = new Router({
       path: '/upload',
       name: 'upload',
       component: Upload,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/profile',
-      name: 'profile',
-      component: Profile,
       meta: {
         requiresAuth: true
       }

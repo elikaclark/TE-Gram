@@ -66,38 +66,7 @@
           </div>
           <button type="button" class="btn btn-danger">Like</button>
           <!--Comment Modal-->
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-toggle="modal"
-            data-target="#exampleModal"
-          >Comments</button>
-
-          <!-- Modal -->
-          <div
-            class="modal fade"
-            id="exampleModal"
-            tabindex="-1"
-            role="dialog"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Comments</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">...</div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
+           <PhotoComments v-bind:photo="post" />
           <!-- . -->
           <button v-if="$store.state.user.id == $route.params.id"
             type="button"
@@ -143,6 +112,7 @@
 
 <script>
 import CloudinaryService from "@/services/CloudinaryService";
+import PhotoComments from "../components/PhotoComments";
 import Edit from "../components/Edit";
 
 export default {
@@ -162,6 +132,7 @@ export default {
   },
   components: {
     Edit,
+    PhotoComments
   },
   data() {
     return {
