@@ -1,10 +1,7 @@
 <template>
   <div id="app">
-    {{photo_id}}
     <!-- image upload code -->
-    <form @submit.prevent="uploadImage($event)" @change="checkImageStatus($event)">
-      <input type="file" id="file-upload" name="filename" />
-      <button type="submit" :disabled="!ready">Upload</button>
+    <form>
       <!-- <img v-bind:src="output_src"> -->
       <input v-model="description" type="text" name id />
       <button @click.prevent="editUpload()" type="submit">Confirm Changes</button>
