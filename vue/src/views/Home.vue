@@ -12,7 +12,7 @@
             data-target="#picModal"
           />
           <button type="button" class="btn btn-danger">Likes: {{photo.likes}}</button>
-          <button type="button" class="btn btn-primary">Comments</button>
+          <button type="button" class="btn btn-primary" v-on:click="showCommentsByPhoto(photo.photo_id)">Comments</button>
           <button 
           v-if="!inFavorites(photo.photo_id)" type="button" class="btn btn-info" @click.prevent="addToFavorite(photo.photo_id)">
             Favorite
@@ -99,6 +99,11 @@ export default {
       }).catch(err =>{
         console.log(err);
       })
+    },
+      showCommentsByPhoto(photoId) {
+    this.$router.push({ name: 'commentByPhoto',
+     params: { id: photoId } });
+
     }
   },
   mounted: function () {
