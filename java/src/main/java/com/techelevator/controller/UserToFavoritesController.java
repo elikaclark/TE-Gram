@@ -29,7 +29,7 @@ public class UserToFavoritesController {
         return allFavs;
     }
 
-    @RequestMapping(path = "/{id}/favorite", method = RequestMethod.GET)
+    @RequestMapping(path = "/{id}/favorites", method = RequestMethod.GET)
     public List<Photo> getUserFavPhotos(@PathVariable("id") Long user_id){
         List<Photo> userFavs = userToFavDao.getAllUserFavorites(user_id);
         return userFavs;
@@ -42,7 +42,7 @@ public class UserToFavoritesController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "addFavorite", method = RequestMethod.POST)
+    @RequestMapping(path = "/addFavorite", method = RequestMethod.POST)
     public void addNewFavorite(@Valid @RequestBody UserToFavorite usrFav){
         List<Photo> thisUsersFavs = userToFavDao.getAllUserFavorites(usrFav.getUser_id());
         boolean existingFavorite = false;
@@ -67,7 +67,7 @@ public class UserToFavoritesController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(path = "deleteFavorite", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/deleteFavorite", method = RequestMethod.DELETE)
     public void deleteFavorite(@Valid @RequestBody UserToFavorite favToDelete){
         boolean deleted = userToFavDao.deleteFavorite(favToDelete);
         if(deleted){
