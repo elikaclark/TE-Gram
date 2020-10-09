@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       photos: [],
-      userFavPhotos: [],
+      userFavPhotos: []
     };
   },
   methods: {
@@ -100,6 +100,7 @@ export default {
         console.log(err);
       })
     }
+    
   },
   mounted: function () {
     fetch("http://localhost:8080/photos", {
