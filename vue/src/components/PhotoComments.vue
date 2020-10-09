@@ -1,3 +1,5 @@
+// INFO NEEDED:
+// PLEASE PASS IN INDIVIDUAL PHOTO OBJECT
 <template>
   <div>
     <button

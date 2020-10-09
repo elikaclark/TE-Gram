@@ -1,3 +1,6 @@
+//INFO NEEDED
+//PLEASE PASS IN PHOTO INFORMATION
+
 <template>
   <div id="app">
     <!-- image upload code -->
