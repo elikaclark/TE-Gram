@@ -7,7 +7,6 @@
       :data-target="'#' + 'exampleModal' + photo.photo_id"
       @click="commentsByPhoto(photo.photo_id)"
     >Comments</button>
-    {{allCommentsOnPhoto}}
     <!-- Modal -->
     <div
       class="modal fade"
@@ -25,17 +24,31 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div
-            v-for="comment in allCommentsOnPhoto"
-            :key="comment.comment_id"
-            class="modal-body"
-          >User: {{comment.user_id}}
-          "{{comment.text}}"
-          {{comment.datetime}} <br>
+          <!-- Modal Content -->
+          <div v-for="comment in allCommentsOnPhoto" :key="comment.comment_id" class="modal-body">
+            User: {{comment.user_id}}
+            "{{comment.text}}"
+            {{comment.datetime}}
+            <br />
+            <!-- Add Comment form -->
+            <form>
+              <input
+                v-model="text"
+                type="text"
+                id="comment-upload"
+                placeholder="Leave a comment..."
+                maxlength="250"
+                required
+                @keyup.enter="submitComment"
+                name
+                id1
+              />
+              <button @click="saveUpload()">SEND</button>
+              <button @click="deleteComment(comment.comment_id)">Delete Comment</button>
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>
@@ -46,9 +59,7 @@
 <script>
 export default {
   name: "photoComments",
-  mounted: {
-
-  },
+  mounted: {},
   data() {
     return {
       allCommentsOnPhoto: "",
@@ -72,6 +83,30 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+    },
+    saveUpload() {
+      fetch("http://localhost:8080/addComment/", {
+        method: "post",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: this.text,
+          user_id: this.$store.state.user.id,
+          likes: 1,
+          photo_id: this.photo.photo_id,
+        }),
+      }).then((response) => {
+        console.log(response);
+      });
+    },
+
+    deleteComment(id) {
+        var url = "http://localhost:8080/comments/" + id
+      fetch(url, {
+        method: "delete",
+      });
     },
   },
 };
