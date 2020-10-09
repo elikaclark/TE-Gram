@@ -11,6 +11,7 @@ import Profile from '../views/Profile.vue'
 import Upload from '../views/Upload.vue'
 import Test from '../views/Test.vue'
 import Favorites from '../views/Favorite.vue'
+import UserProfile from '../views/UserProfile.vue'
 
 Vue.use(Router)
 
@@ -48,7 +49,15 @@ const router = new Router({
       name: 'profile',
       component: Profile,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/profile/:id',
+      name: 'userProfile',
+      component: UserProfile,
+      meta: {
+        requiresAuth: true
       }
     },
     {
@@ -64,7 +73,7 @@ const router = new Router({
       name: "logout",
       component: Logout,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
