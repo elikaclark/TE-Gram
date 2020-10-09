@@ -97,6 +97,4 @@ public class CommentSqlDAO implements CommentDAO {
 
 		return comment;
 	}
-
-
 }

@@ -12,7 +12,9 @@
             data-target="#picModal"
           />
           <button type="button" class="btn btn-danger">Likes: {{photo.likes}}</button>
-          <button type="button" class="btn btn-primary" v-on:click="showCommentsByPhoto(photo.photo_id)">Comments</button>
+          <!-- . -->
+          <PhotoComments v-bind:photo="photo"/>
+          <!-- . -->
           <button 
           v-if="!inFavorites(photo.photo_id)" type="button" class="btn btn-info" @click.prevent="addToFavorite(photo.photo_id)">
             Favorite
@@ -31,8 +33,13 @@
 </template>
 
 <script>
+import PhotoComments from '../components/PhotoComments.vue'
+
 export default {
   name: "test",
+  components: {
+    PhotoComments
+  },
   data() {
     return {
       photos: [],
