@@ -99,7 +99,7 @@
             </div>
           </div>
           <!-- . -->
-          <button
+          <button v-if="$store.state.user.id == $route.params.id"
             type="button"
             class="btn btn-warning"
             data-toggle="modal"
@@ -142,12 +142,11 @@
 </template>
 
 <script>
+import CloudinaryService from "@/services/CloudinaryService";
+import Edit from "../components/Edit";
+
 export default {
-  data() {
-    return {
-      posts: [],
-    };
-  },
+  name: "profile",
   mounted: function () {
     var url = "http://localhost:8080/photos/users/" + this.$route.params.id;
     console.log(url);
@@ -160,6 +159,52 @@ export default {
       .then((jsonBody) => {
         this.posts = jsonBody;
       });
+  },
+  components: {
+    Edit,
+  },
+  data() {
+    return {
+      posts: "",
+      ready: false,
+      data_url: "",
+      output_src: "",
+    };
+  },
+  methods: {
+    checkImageStatus(evt) {
+      const fileName = evt.target.files[0];
+      const reader = new FileReader();
+
+      reader.readAsDataURL(fileName);
+      reader.onload = () => {
+        this.data_url = reader.result;
+        this.output_src = this.data_url;
+        this.ready = true;
+      };
+    },
+    uploadImage() {
+      const formData = new FormData();
+
+      formData.append("file", this.data_url);
+      CloudinaryService.newImage(formData)
+        .then((response) => response.json())
+        .then((jsonData) => {
+          if (jsonData.secure_url !== "") {
+            console.log(jsonData.secure_url);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    deleteUpload(id) {
+      var url = "http://localhost:8080/photos/" + id;
+      fetch(url, {
+        method: "delete",
+      });
+      window.location.reload();
+    },
   },
 };
 </script>

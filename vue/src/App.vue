@@ -28,7 +28,7 @@
         >
           <ul class="navbar-nav text-right">
             <li class="nav-item active">
-              <router-link v-bind:to="{ name: 'profile' }">Profile</router-link>
+              <router-link :to="'/profile/' + $store.state.user.id">Profile</router-link>
             </li>
             <li class="nav-item active">
               <router-link v-bind:to="{ name: 'favorites' }">Favorites</router-link>

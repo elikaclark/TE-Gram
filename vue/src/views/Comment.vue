@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     {{upload_src}}
+    {{photo_id}}
     <div class="container">
 
 
@@ -21,20 +22,20 @@
                     @keyup.enter="submitComment" name id1 />
       <button @click="saveUpload()">SEND</button>
       <button @click="deleteComment()">Delete Comment</button>
-
+      <button @click="showCommentsByPhoto()">Comments</button>
     </form>
   </div>
 </template>
 
 <script>
 
-
-
 export default {
   name: "comment",
   data() {
     return {
-      text: ""
+      text: "",
+      photo_id: -1,
+      allCommentsOnPhoto: []
     };
   },
   methods: {
@@ -63,8 +64,33 @@ export default {
            method: "delete"
 
        })
+    },
+      commentsByPhoto(){
+
+      fetch("http://localhost:8080/" + this.$router.params.id + "/comments",{
+      method: "GET"
+      }).then(response => response.json())
+      .then(json =>{
+        this.allCommentsOnPhoto = json;
+      }).catch(err =>{
+        console.log(err);
+      });
+
+    },
+
+    showCommentsByPhoto() {
+      fetch("http://localhost:8080/3/comments/", {
+        method:"get"
+      })
     }
   },
+  created() {
+    this.photo_id=this.$route.params.id;
+
+  // go to the server endpoint and get all the comments.
+  // and store those comments somewhere
+
+  }
 };
 </script>
 
