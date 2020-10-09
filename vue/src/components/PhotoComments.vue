@@ -25,6 +25,18 @@
             </button>
           </div>
           <!-- Modal Content -->
+          <input
+            v-model="text"
+            type="text"
+            id="comment-upload"
+            placeholder="Leave a comment..."
+            maxlength="250"
+            required
+            @keyup.enter="submitComment"
+            name
+            id1
+          />
+          <button @click="saveUpload()">SEND</button>
           <div v-for="comment in allCommentsOnPhoto" :key="comment.comment_id" class="modal-body">
             User: {{comment.user_id}}
             "{{comment.text}}"
@@ -32,18 +44,6 @@
             <br />
             <!-- Add Comment form -->
             <form>
-              <input
-                v-model="text"
-                type="text"
-                id="comment-upload"
-                placeholder="Leave a comment..."
-                maxlength="250"
-                required
-                @keyup.enter="submitComment"
-                name
-                id1
-              />
-              <button @click="saveUpload()">SEND</button>
               <button @click="deleteComment(comment.comment_id)">Delete Comment</button>
             </form>
           </div>
@@ -100,10 +100,11 @@ export default {
       }).then((response) => {
         console.log(response);
       });
+      window.location.reload()
     },
 
     deleteComment(id) {
-        var url = "http://localhost:8080/comments/" + id
+      var url = "http://localhost:8080/comments/" + id;
       fetch(url, {
         method: "delete",
       });
