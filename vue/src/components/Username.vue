@@ -1,30 +1,31 @@
+//PASS IN USER ID 
 <template>
-  <div class="container">
-    <PostPhoto :photos = "photos"/>
+  <div>
+    {{users.name}}
   </div>
 </template>
 
 <script>
-import PostPhoto from "../components/PostPhoto";
 export default {
-  name: "home",
-  components: {
-    PostPhoto,
-  },
+  name: "Username",
   data() {
     return {
-      photos: [],
+      users: "",
     };
   },
+  props: {
+    photo: Object,
+  },
   mounted: function () {
-    fetch("http://localhost:8080/photos", {
+    var url = "http://localhost:8080/user/" + this.photo.user_id;
+    fetch(url, {
       method: "get",
     })
       .then((response) => {
         return response.json();
       })
       .then((jsonBody) => {
-        this.photos = jsonBody.reverse();
+        this.users = jsonBody;
       });
   },
 };

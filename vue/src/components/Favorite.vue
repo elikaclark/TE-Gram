@@ -6,15 +6,23 @@
     <button
       v-if="!inFavorites(photo.photo_id)"
       type="button"
-      class="btn btn-info"
+      class="btn btn-warning"
       @click.prevent="addToFavorite(photo.photo_id)"
-    >Favorite</button>
+    >
+      <span>
+        <i class="far fa-star"></i>
+      </span>
+    </button>
     <button
       v-else
       type="button"
-      class="btn btn-info"
+      class="btn btn-warning"
       @click.prevent="deleteFromFavorite(photo.photo_id)"
-    >Unfavorite</button>
+    >
+      <span>
+        <i class="fas fa-star"></i>
+      </span>
+    </button>
   </div>
 </template>
 

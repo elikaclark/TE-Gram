@@ -9,7 +9,7 @@
       data-toggle="modal"
       :data-target="'#' + 'exampleModal' + photo.photo_id"
       @click="commentsByPhoto(photo.photo_id)"
-    >Comments</button>
+    ><span><i class="far fa-comments"></i></span></button>
     <!-- Modal -->
     <div
       class="modal fade"
@@ -47,7 +47,10 @@
             <br />
             <!-- Add Comment form -->
             <form>
-              <button @click="deleteComment(comment.comment_id)">Delete Comment</button>
+              <button
+                v-if="$store.state.user.id == comment.user_id || $store.state.user.role == 'ROLE_ADMIN'"
+                @click="deleteComment(comment.comment_id)"
+              >Delete Comment</button>
             </form>
           </div>
           <div class="modal-footer">
@@ -62,10 +65,10 @@
 <script>
 export default {
   name: "photoComments",
-  mounted: {},
   data() {
     return {
       allCommentsOnPhoto: "",
+      text: "",
     };
   },
   props: {
@@ -103,7 +106,7 @@ export default {
       }).then((response) => {
         console.log(response);
       });
-      window.location.reload()
+      window.location.reload();
     },
 
     deleteComment(id) {

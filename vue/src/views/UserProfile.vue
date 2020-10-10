@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <header>
-      <h1>WELCOME {{$route.params}}"</h1>
+      <h1>"Welcome, {{$store.state.user.name}}"</h1>
     </header>
     <!-- Post -->
     <PostPhoto :photos = "photos"/>

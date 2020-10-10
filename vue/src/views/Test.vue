@@ -1,15 +1,18 @@
 <template>
   <div>
     <PostPhoto :photos = "photos"/>
+    <UserName />
   </div>
 </template>
 
 <script>
 import PostPhoto from "../components/PostPhoto";
+import UserName from "../components/Username"
 export default {
   name: "test",
   components: {
     PostPhoto,
+    UserName
   },
   data() {
     return {
