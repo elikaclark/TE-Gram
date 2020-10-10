@@ -1,44 +1,23 @@
 <template>
   <div>FAVORITES
     <div class="container">
-    <div class="row posts">
-      <div class="col-sm-12 col-md-4 post-box" v-for="photo in userFavPhotos" :key="photo.photo_id">
-        <router-link :to="'/profile/'+photo.user_id"> -_- {{photo.user_id}} </router-link>
-        <div>
-          <img
-            class="postImg imgHover"
-            :src="photo.photo_src"
-            alt
-            data-toggle="modal"
-            data-target="#picModal"
-          />
-          <button type="button" class="btn btn-danger">Likes: {{photo.likes}}</button>
-          <button type="button" class="btn btn-primary">Comments</button>
-          <button 
-          v-if="!inFavorites(photo.photo_id)" type="button" class="btn btn-info" @click.prevent="addToFavorite(photo.photo_id)">
-            Favorite
-          </button>
-          <button 
-          v-else type="button" class="btn btn-info" @click.prevent="deleteFromFavorite(photo.photo_id)">
-            Unfavorite
-          </button>
-          <div>
-            "{{photo.description}}"
-          </div>
-        </div>
-      </div>
+      <PostPhotos :photos = "userFavPhotos"/>
     </div>
-  </div>
   </div>
 </template>
 
 <script>
+import PostPhotos from '../components/PostPhoto'
 export default {
   name: "favorites",
+  
   data() {
     return {
       userFavPhotos: [],
     }
+  },
+  components: {
+    PostPhotos
   },
    methods: {
     checkUserFavorites(){

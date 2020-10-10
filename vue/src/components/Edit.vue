@@ -3,12 +3,50 @@
 
 <template>
   <div id="app">
+    <button
+      v-if="$store.state.user.id == $route.params.id"
+      type="button"
+      class="btn btn-warning"
+      data-toggle="modal"
+      :data-target="'#'+'editModal'+post.photo_id"
+    >Edit</button>
+    <br />
+    {{post.description}}
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      :id="'editModal'+post.photo_id"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="editModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Edit</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <img :src="post.photo_src" style="width:100%" />
+
+            <form>
+              <!-- <img v-bind:src="output_src"> -->
+              <input v-model="description" type="text" />
+              <button @click.prevent="editUpload()" type="submit">Confirm Changes</button>
+            </form>
+
+            <button @click="deleteUpload(post.photo_id)" type="submit">DELETE POST</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- image upload code -->
-    <form>
-      <!-- <img v-bind:src="output_src"> -->
-      <input v-model="description" type="text" name id />
-      <button @click.prevent="editUpload()" type="submit">Confirm Changes</button>
-    </form>
   </div>
 </template>
 
@@ -21,7 +59,7 @@ export default {
     this.photo_id = this.postId;
   },
   props: {
-    postId: Object
+    postId: Object,
   },
   data() {
     return {
@@ -81,6 +119,13 @@ export default {
         console.log(response);
         // window.location.reload();
       });
+    },
+    deleteUpload(id) {
+      var url = "http://localhost:8080/photos/" + id;
+      fetch(url, {
+        method: "delete",
+      });
+      window.location.reload();
     },
   },
 };

@@ -1,6 +1,6 @@
 <template>
   <div>
-      
+      <button class = "btn btn-danger">LIKES</button>
   </div>
 </template>
 

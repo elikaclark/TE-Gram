@@ -2,6 +2,7 @@
 // PLEASE PASS IN INDIVIDUAL PHOTO OBJECT
 <template>
   <div>
+    <!-- Modal Button -->
     <button
       type="button"
       class="btn btn-primary"
@@ -26,7 +27,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <!-- Modal Content -->
+          <!-- Add new comment -->
           <input
             v-model="text"
             type="text"

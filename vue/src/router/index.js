@@ -11,7 +11,6 @@ import Upload from '../views/Upload.vue'
 import Test from '../views/Test.vue'
 import Favorites from '../views/Favorite.vue'
 import UserProfile from '../views/UserProfile.vue'
-import Comment from '../views/Comment.vue'
 
 Vue.use(Router)
 
@@ -80,22 +79,6 @@ const router = new Router({
       path: '/test',
       name: 'test',
       component: Test,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/comments',
-      name: 'comments',
-      component: Comment,
-      meta: {
-        requiresAuth: true
-      }
-    },
-    {
-      path: '/:id/comments',
-      name: 'commentByPhoto',
-      component: Comment,
       meta: {
         requiresAuth: true
       }
