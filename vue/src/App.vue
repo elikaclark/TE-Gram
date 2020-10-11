@@ -34,7 +34,7 @@
             </button>
           </router-link>
 
-          <router-link v-bind:to="{ name: '' }">
+          <router-link v-bind:to="'/settings/' + $store.state.user.id">
             <button class="btn btn-dark">
               <i class="fas fa-cog"></i>
             </button>

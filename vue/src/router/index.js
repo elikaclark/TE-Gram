@@ -11,6 +11,7 @@ import Upload from '../views/Upload.vue'
 import Test from '../views/Test.vue'
 import Favorites from '../views/Favorite.vue'
 import UserProfile from '../views/UserProfile.vue'
+import UserSettings from '../views/UserSettings.vue'
 
 Vue.use(Router)
 
@@ -87,6 +88,14 @@ const router = new Router({
       path: '/favorites',
       name: 'favorites',
       component: Favorites,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/settings/:id',
+      name: 'settings',
+      component: UserSettings,
       meta: {
         requiresAuth: true
       }
