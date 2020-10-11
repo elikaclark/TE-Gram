@@ -8,14 +8,14 @@
       >
         <!--Home button-->
         <div>
-          <router-link v-bind:to="{ name: 'home' }">
-            <i class="fas fa-mug-hot"></i> TE GRAM
+          <router-link v-bind:to="{ name: 'home' }" id="logo">
+            <i class="fas fa-mug-hot" ></i> TE GRAM
           </router-link>
         </div>
 
         <!-- new post -->
         <div>
-          <router-link class="btn btn-success" v-bind:to="{ name: 'upload' }">
+          <router-link id="addButton" class="btn btn-success" v-bind:to="{ name: 'upload' }">
             <i class="far fa-plus-square"></i>
           </router-link>
         </div>
@@ -64,3 +64,12 @@
     <router-view />
   </div>
 </template>
+
+<style scoped>
+#addButton {
+  margin-left: 50%;
+}
+#logo {
+  color:white;
+}
+</style>

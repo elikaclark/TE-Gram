@@ -104,7 +104,6 @@ export default {
 
 .post-box {
   border: gray 1px solid;
-  border-radius: 4px;
   padding: 2%;
 }
 
@@ -112,4 +111,5 @@ export default {
   width: 100%;
   height: auto;
 }
+
 </style>

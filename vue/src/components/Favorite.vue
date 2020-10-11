@@ -6,7 +6,7 @@
     <button
       v-if="!inFavorites(photo.photo_id)"
       type="button"
-      class="btn btn-light"
+      class="btn btn-dark"
       @click.prevent="addToFavorite(photo.photo_id)"
     >
       <span>
@@ -110,5 +110,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.btn {
+  border-radius: 0px !important;
+}
 </style>

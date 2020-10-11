@@ -4,9 +4,16 @@
   <div>
     <div class="row posts">
       <div class="col-sm-12 col-md-4 post-box" v-for="photo in photos" :key="photo.photo_id">
-        <div class="d-flex justify-content-between">
-          <router-link :to="'/profile/'+photo.user_id">
-            <Username :photo="photo" />
+        <div class="d-flex justify-content-between bg-dark">
+          <router-link :to="'/profile/'+photo.user_id" id="postUsername">
+            <span class="d-flex">
+              <button class="btn btn-dark">
+                <i class="far fa-user"></i>
+              </button>
+              <span class="d-flex align-items-center">
+                <Username :photo="photo" />
+              </span>
+            </span>
           </router-link>
           <Edit :photo="photo" />
         </div>
@@ -32,27 +39,32 @@
           >
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
               <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">🧍 {{photo.user_id}}</h5>
+                <div class="modal-header bg-dark">
+                  <!-- Username -->
+                  <h5 class="modal-title" id="exampleModalLongTitle">
+                    <Username :photo="photo" id="postUsername" />
+                  </h5>
+                  <!-- Close button -->
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body">
                   <img class="modalImg" :src="photo.photo_src" alt />
-                  {{photo.description}}
+                  <div class="col align-self-center">"{{photo.description}}"</div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+
+                <div class="modal-footer bg-dark">
+                  <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
                 </div>
               </div>
             </div>
             <!-- . -->
           </div>
           <!-- buttons -->
-          <div class="d-flex">
+          <div class="d-flex bg-dark">
             <div class="p-2">
-              <Likes :photo="photo"/>
+              <Likes :photo="photo" />
             </div>
             <div class="p-2">
               <PhotoComments :photo="photo" />
@@ -96,6 +108,10 @@ export default {
 </script>
 
 <style scoped>
+#postUsername {
+  color: white;
+}
+
 .imgHover:hover {
   opacity: 0.7;
   cursor: pointer;
@@ -112,5 +128,9 @@ export default {
 
 .p-2 {
   padding: 0rem !important;
+}
+
+.close {
+  color: white;
 }
 </style>
