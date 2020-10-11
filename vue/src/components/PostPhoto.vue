@@ -52,7 +52,7 @@
           <!-- buttons -->
           <div class="d-flex">
             <div class="p-2">
-              <Likes />
+              <Likes :photo="photo"/>
             </div>
             <div class="p-2">
               <PhotoComments :photo="photo" />
@@ -63,7 +63,9 @@
           </div>
           <!-- . -->
           <div>
-            <b>User: {{photo.user_id}}:</b>
+            <b>
+              <Username :photo="photo" />
+            </b>
             "{{photo.description}}"
           </div>
         </div>
@@ -88,7 +90,7 @@ export default {
     Username,
   },
   props: {
-    photos: Object,
+    photos: Array,
   },
 };
 </script>

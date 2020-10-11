@@ -6,7 +6,7 @@
     <button
       v-if="!inFavorites(photo.photo_id)"
       type="button"
-      class="btn btn-warning"
+      class="btn btn-light"
       @click.prevent="addToFavorite(photo.photo_id)"
     >
       <span>

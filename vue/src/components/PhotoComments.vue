@@ -5,11 +5,15 @@
     <!-- Modal Button -->
     <button
       type="button"
-      class="btn btn-primary"
+      class="btn btn-dark"
       data-toggle="modal"
       :data-target="'#' + 'exampleModal' + photo.photo_id"
       @click="commentsByPhoto(photo.photo_id)"
-    ><span><i class="far fa-comments"></i></span></button>
+    >
+      <span>
+        <i class="far fa-comments"></i>
+      </span>
+    </button>
     <!-- Modal -->
     <div
       class="modal fade"
@@ -28,7 +32,7 @@
             </button>
           </div>
           <!-- Add new comment -->
-          <input
+          <textarea
             v-model="text"
             type="text"
             id="comment-upload"
@@ -36,22 +40,24 @@
             maxlength="250"
             required
             @keyup.enter="submitComment"
-            name
-            id1
           />
-          <button @click="saveUpload()">SEND</button>
+          <button @click="saveUpload()" class="btn btn-success">SEND</button>
           <div v-for="comment in allCommentsOnPhoto" :key="comment.comment_id" class="modal-body">
-            User: {{comment.user_id}}
+            <button
+              class="btn btn-danger float-right"
+              v-if="$store.state.user.id == comment.user_id || $store.state.user.role == 'ROLE_ADMIN'"
+              @click="deleteComment(comment.comment_id)"
+            >X</button>
+            <div class="d-flex justify-content-between">
+              <b>
+                <Username v-bind:photo="photo" />
+              </b>
+              10/10/1999
+            </div>
             "{{comment.text}}"
-            {{comment.datetime}}
             <br />
             <!-- Add Comment form -->
-            <form>
-              <button
-                v-if="$store.state.user.id == comment.user_id || $store.state.user.role == 'ROLE_ADMIN'"
-                @click="deleteComment(comment.comment_id)"
-              >Delete Comment</button>
-            </form>
+            <form></form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -63,8 +69,13 @@
 </template>
 
 <script>
+import Username from "../components/Username";
+
 export default {
   name: "photoComments",
+  components: {
+    Username,
+  },
   data() {
     return {
       allCommentsOnPhoto: "",

@@ -8,13 +8,15 @@
       >
         <!--Home button-->
         <div>
-          <router-link v-bind:to="{ name: 'home' }">☕TE GRAM</router-link>
+          <router-link v-bind:to="{ name: 'home' }">
+            <i class="fas fa-mug-hot"></i> TE GRAM
+          </router-link>
         </div>
 
         <!-- new post -->
         <div>
           <router-link class="btn btn-success" v-bind:to="{ name: 'upload' }">
-            <i class="far fa-plus-square"></i> New Post
+            <i class="far fa-plus-square"></i>
           </router-link>
         </div>
 
@@ -32,14 +34,14 @@
             <ul class="navbar-nav text-right">
               <li class="nav-item active">
                 <router-link :to="'/profile/' + $store.state.user.id">
-                  <button class="btn btn-info">
+                  <button class="btn btn-dark">
                     <i class="far fa-user"></i>
                   </button>
                 </router-link>
               </li>
               <li class="nav-item active">
                 <router-link v-bind:to="{ name: 'favorites' }">
-                  <button class="btn btn-warning">
+                  <button class="btn btn-dark">
                     <i class="fas fa-star"></i>
                   </button>
                 </router-link>
@@ -51,7 +53,6 @@
             v-bind:to="{ name: 'logout' }"
             v-if="$store.state.token != ''"
           >
-            Logout
             <i class="fas fa-sign-out-alt"></i>
           </router-link>
         </span>

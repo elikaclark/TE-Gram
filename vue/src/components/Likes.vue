@@ -3,6 +3,7 @@
     <button class="btn btn-danger">
       <span>
         <i class="far fa-heart"></i>
+        {{photo.likes}}
       </span>
     </button>
   </div>
@@ -10,7 +11,10 @@
 
 <script>
 export default {
-  
+  name: "likes",
+  props: {
+    photo: Object
+  }
 };
 </script>
 

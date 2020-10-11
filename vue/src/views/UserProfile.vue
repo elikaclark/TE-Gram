@@ -1,15 +1,18 @@
 <template>
   <div class="container">
-    <header>
-      <h1>"Welcome, {{$store.state.user.name}}"</h1>
+    <header class="text-center">
+      <h1 v-if="$route.params.id == $store.state.user.id">Welcome, {{$store.state.user.name}}</h1>
+      <!-- THIS IS NOT RENDERING -->
+      <Username :photo="photos[0]" />
     </header>
     <!-- Post -->
-    <PostPhoto :photos = "photos"/>
+    <PostPhoto :photos="photos" />
   </div>
 </template>
 
 <script>
 import PostPhoto from "../components/PostPhoto";
+import Username from "../components/Username";
 
 export default {
   name: "profile",
@@ -18,10 +21,11 @@ export default {
       photos: "",
     };
   },
-    components: {
+  components: {
     PostPhoto,
+    Username,
   },
-  mounted: function () {
+  created: function () {
     var url = "http://localhost:8080/photos/users/" + this.$route.params.id;
     console.log(url);
     fetch(url, {
@@ -34,7 +38,6 @@ export default {
         this.photos = jsonBody;
       });
   },
-
 };
 </script>
 

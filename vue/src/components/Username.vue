@@ -16,7 +16,7 @@ export default {
   props: {
     photo: Object,
   },
-  mounted: function () {
+  created: function () {
     var url = "http://localhost:8080/user/" + this.photo.user_id;
     fetch(url, {
       method: "get",

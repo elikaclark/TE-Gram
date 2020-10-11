@@ -4,14 +4,16 @@
       <div class="col-sm-12 col-lg-6 picBox">
         <img
           class="loginPic"
-          src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80"
+          src="https://i.pinimg.com/originals/e4/21/89/e4218901f99a8ae6fa14955360f9a03b.gif"
           alt
         />
       </div>
       <div class="form-box col-sm-12 col-lg-6 d-flex justify-content-center align-items-center">
         <div id="login" class="text-center">
           <form class="form-signin" @submit.prevent="login">
-            <h1>☕ TE Gram</h1>
+            <h1>
+              <i class="fas fa-mug-hot"></i> TE Gram
+            </h1>
             <h1 class="h3 mb-3 font-weight-normal">Login</h1>
             <div
               class="alert alert-danger"
@@ -110,6 +112,7 @@ export default {
   height: 405px;
   width: 100%;
   border-radius: 15px;
+  border: 1px gray solid;
 }
 .row {
   margin-top: 20%;
@@ -121,7 +124,7 @@ export default {
 
 @media (max-width: 990px) {
   .form-box {
-    background-image: url("https://images.unsplash.com/photo-1452587925148-ce544e77e70d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80");
+    background-image: url("https://i.pinimg.com/originals/e4/21/89/e4218901f99a8ae6fa14955360f9a03b.gif");
     background-size: 720px 600px;
     background-repeat: no-repeat;
   }
@@ -154,6 +157,7 @@ export default {
     height: 110%;
     background-size: cover;
     border-radius: 0px;
+    border: 1px gray solid;
   }
 }
 </style>
