@@ -9,7 +9,7 @@
         <!--Home button-->
         <div>
           <router-link v-bind:to="{ name: 'home' }" id="logo">
-            <i class="fas fa-mug-hot" ></i> TE Time
+            <i class="fas fa-mug-hot"></i> TE Time
           </router-link>
         </div>
 
@@ -19,35 +19,27 @@
             <i class="far fa-plus-square"></i>
           </router-link>
         </div>
-
-        <!-- logout -->
         <span class="d-flex">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse flex-grow-0" id="navbarSupportedContent">
-            <ul class="navbar-nav text-right">
-              <li class="nav-item active">
-                <router-link :to="'/profile/' + $store.state.user.id">
-                  <button class="btn btn-dark">
-                    <i class="far fa-user"></i>
-                  </button>
-                </router-link>
-              </li>
-              <li class="nav-item active">
-                <router-link v-bind:to="{ name: 'favorites' }">
-                  <button class="btn btn-dark">
-                    <i class="far fa-star"></i>
-                  </button>
-                </router-link>
-              </li>
-            </ul>
-          </div>
+          <!-- HAMBURGER -->
+
+          <router-link :to="'/profile/' + $store.state.user.id">
+            <button class="btn btn-dark">
+              <i class="fas fa-user"></i>
+            </button>
+          </router-link>
+
+          <router-link v-bind:to="{ name: 'favorites' }">
+            <button class="btn btn-dark">
+              <i class="fas fa-star"></i>
+            </button>
+          </router-link>
+
+          <router-link v-bind:to="{ name: '' }">
+            <button class="btn btn-dark">
+              <i class="fas fa-cog"></i>
+            </button>
+          </router-link>
+
           <router-link
             class="btn btn-danger"
             v-bind:to="{ name: 'logout' }"
@@ -67,9 +59,9 @@
 
 <style scoped>
 #addButton {
-  margin-left: 50%;
+  margin-left: 100%;
 }
 #logo {
-  color:white;
+  color: white;
 }
 </style>

@@ -50,7 +50,7 @@
             >X</button>
             <div class="d-flex justify-content-between">
               <b>
-                <Username v-bind:photo="photo" />
+                <Username v-bind:photo="comment" />
               </b>
               10/10/1999
             </div>

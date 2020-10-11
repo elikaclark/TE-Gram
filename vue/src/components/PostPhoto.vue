@@ -78,7 +78,7 @@
             <b>
               <Username :photo="photo" />
             </b>
-            "{{photo.description|limit(100)}}"
+            "{{photo.description|limit(117)}}"
           </div>
         </div>
       </div>
@@ -106,8 +106,8 @@ export default {
   },
   filters: {
     limit: function(value) {
-      if (value.length > 100) {
-        value = value.substring(0, 97) + '...';
+      if (value.length > 120) {
+        value = value.substring(0, 117) + '...';
       }
       return value
     }
@@ -119,7 +119,8 @@ export default {
 #description {
   color: white;
   padding: 3%;
-  height: 130px
+  height: 130px;
+  border-top: 1px rgba(250, 250, 250, 0.8) solid;
 }
 #postUsername {
   color: white;

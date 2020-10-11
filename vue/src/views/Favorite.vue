@@ -103,7 +103,7 @@ export default {
 }
 
 .post-box {
-  border: gray 1px solid;
+
   padding: 2%;
 }
 
