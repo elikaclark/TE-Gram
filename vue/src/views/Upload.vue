@@ -1,17 +1,27 @@
 <template>
   <div id="app">
-    {{upload_src}}
+    <div class="text-center">
+      <h1>UPLOAD A PHOTO</h1>
+    </div>
+
     <div class="container">
-      <img v-bind:src="output_src" alt />
+      <div class="row">
+        <div class="offset-lg-2 col-lg-8">
+          <img v-bind:src="output_src" alt />
+          <form @submit.prevent="uploadImage($event)" @change="checkImageStatus($event)">
+            <div class="d-flex justify-content-center">
+              <input type="file" id="file-upload" name="filename" />
+              <button type="submit" :disabled="!ready">Upload</button>
+            </div>
+            <div v-if="upload_src.length > 0" class="d-flex justify-content-center">
+              <textarea v-model="description" type="text" placeholder="Add a description!" />
+              <button class="btn btn-success" @click="saveUpload()" type="submit">UPLOAD</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
     <!-- image upload code -->
-    <form @submit.prevent="uploadImage($event)" @change="checkImageStatus($event)">
-      <input type="file" id="file-upload" name="filename" />
-      <button type="submit" :disabled="!ready">Upload</button>
-      <!-- <img v-bind:src="output_src"> -->
-      <input v-model="description" type="text" name id />
-      <button @click="saveUpload()" type="submit">FULL SEND</button>
-    </form>
   </div>
 </template>
 
@@ -25,7 +35,7 @@ export default {
       ready: false,
       data_url: "",
       output_src:
-        "https://images.unsplash.com/photo-1534278931827-8a259344abe7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+        "https://1adn3cp4l2-flywheel.netdna-ssl.com/wp-content/uploads/2018/02/ftp-upload.jpg",
       description: "",
       upload_src: "",
     };
@@ -83,5 +93,8 @@ export default {
 <style scoped>
 img {
   width: 100%;
+}
+textarea {
+  width: 100%
 }
 </style>

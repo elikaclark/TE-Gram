@@ -45,7 +45,7 @@
           <div v-for="comment in allCommentsOnPhoto" :key="comment.comment_id" class="modal-body">
             <button
               class="btn btn-danger float-right"
-              v-if="$store.state.user.id == comment.user_id || $store.state.user.role == 'ROLE_ADMIN'"
+              v-if="$store.state.user.id == comment.user_id || $store.state.user.authorities[0].name === 'ROLE_ADMIN'"
               @click="deleteComment(comment.comment_id)"
             >X</button>
             <div class="d-flex justify-content-between">
@@ -125,6 +125,7 @@ export default {
       fetch(url, {
         method: "delete",
       });
+      window.location.reload()
     },
   },
 };

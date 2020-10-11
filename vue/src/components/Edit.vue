@@ -4,12 +4,14 @@
 <template>
   <div id="app">
     <button
-      v-if="$store.state.user.id == $route.params.id || $store.state.user.role == 'ROLE_ADMIN'"
+      v-if="$store.state.user.authorities[0].name === 'ROLE_ADMIN' || $store.state.user.id == $route.params.id"
       type="button"
       class="btn btn-info"
       data-toggle="modal"
       :data-target="'#'+'editModal'+photo.photo_id"
-    ><i class="far fa-edit"></i></button>
+    >
+      <i class="far fa-edit"></i>
+    </button>
     <br />
     <!-- Modal -->
     <div
@@ -57,8 +59,8 @@ export default {
   },
   data() {
     return {
-      description: ""
-    }
+      description: "",
+    };
   },
   methods: {
     editUpload() {
@@ -92,5 +94,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.btn {
+  border-radius: 0px !important;
+}
 </style>

@@ -12,7 +12,7 @@
         <div id="login" class="text-center">
           <form class="form-signin" @submit.prevent="login">
             <h1>
-              <i class="fas fa-mug-hot"></i> TE Gram
+              <i class="fas fa-mug-hot"></i> TE Time
             </h1>
             <h1 class="h3 mb-3 font-weight-normal">Login</h1>
             <div

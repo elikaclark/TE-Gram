@@ -9,7 +9,7 @@
         <!--Home button-->
         <div>
           <router-link v-bind:to="{ name: 'home' }" id="logo">
-            <i class="fas fa-mug-hot" ></i> TE GRAM
+            <i class="fas fa-mug-hot" ></i> TE Time
           </router-link>
         </div>
 
