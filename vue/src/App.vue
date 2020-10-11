@@ -42,7 +42,7 @@
               <li class="nav-item active">
                 <router-link v-bind:to="{ name: 'favorites' }">
                   <button class="btn btn-dark">
-                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
                   </button>
                 </router-link>
               </li>

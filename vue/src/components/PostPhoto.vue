@@ -74,11 +74,11 @@
             </div>
           </div>
           <!-- . -->
-          <div>
+          <div class="bg-dark" id="description">
             <b>
               <Username :photo="photo" />
             </b>
-            "{{photo.description}}"
+            "{{photo.description|limit(100)}}"
           </div>
         </div>
       </div>
@@ -104,10 +104,23 @@ export default {
   props: {
     photos: Array,
   },
+  filters: {
+    limit: function(value) {
+      if (value.length > 100) {
+        value = value.substring(0, 97) + '...';
+      }
+      return value
+    }
+  }
 };
 </script>
 
 <style scoped>
+#description {
+  color: white;
+  padding: 3%;
+  height: 130px
+}
 #postUsername {
   color: white;
 }
@@ -121,6 +134,7 @@ export default {
   height: 400px;
   object-fit: cover;
 }
+
 .modalImg {
   width: 100%;
   height: auto;

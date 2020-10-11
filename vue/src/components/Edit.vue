@@ -24,7 +24,7 @@
     >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header bg-dark" id="banner">
             <h5 class="modal-title" id="editModalLabel">Edit</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -35,13 +35,15 @@
 
             <form>
               <!-- <img v-bind:src="output_src"> -->
-              <textarea v-model="description" type="text" />
-              <button @click="editUpload()" type="submit">Confirm Changes</button>
+              <textarea v-model="description" type="text" placeholder="New Description" />
             </form>
 
-            <button @click="deleteUpload(photo.photo_id)" type="submit">DELETE POST</button>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-success" @click="editUpload()" type="submit">Confirm Changes</button>
+              <button class="btn btn-danger" @click="deleteUpload(photo.photo_id)" type="submit">DELETE POST</button>
+            </div>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer bg-dark">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
@@ -97,5 +99,11 @@ export default {
 <style scoped>
 .btn {
   border-radius: 0px !important;
+}
+textarea {
+  width: 100%;
+}
+#banner{
+  color:white;
 }
 </style>
