@@ -41,7 +41,7 @@ public class PhotoToLikesController {
 	 
 	 @ResponseStatus(HttpStatus.NO_CONTENT)
 		@RequestMapping(path = "/deleteLike", method = RequestMethod.DELETE)
-		public void deletePhoto( @PathVariable PhotoToLikes like) {
+		public void deletePhoto( @RequestBody PhotoToLikes like) {
 		 boolean deleted = photoToLikesDAO.deleteLike(like);
 		 if(deleted){
 	            System.out.println("Deleted like for photo_id: " + like.getPhoto_id() + " with user_id: " + like.getUser_id());

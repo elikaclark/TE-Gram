@@ -58,7 +58,7 @@ public class PhotoToLikesSqlDAO implements PhotoToLikesDAO {
 	@Override
 	public void addLike(PhotoToLikes like) {
 		boolean added = false;
-		String sql = "INSERT INTO photos (photo_id, user_id) values(?,?)";
+		String sql = "INSERT INTO photo_to_likes (photo_id, user_id) values(?,?)";
 		added = jdbcTemplate.update(sql, like.getPhoto_id(), like.getUser_id() ) == 1 ;
 		
 	}
