@@ -1,27 +1,28 @@
-//PASS IN PHOTO INFO
+//INFO REQUIRED
+//BIND TO PHOTO IN PHOTOS
 
 <template>
   <div>
     <button
-      v-if="!isLiked(photo.photo_id) && liked==false"
+      v-if="!inLikes(photo.photo_id)"
       type="button"
       class="btn btn-dark"
-      @click.prevent="addLike(photo.photo_id), flip()"
+      @click.prevent="addLike(photo.photo_id), likes+=1"
     >
       <span>
         <i class="far fa-heart"></i>
-        {{photo.likes}}
+        {{likes}}
       </span>
     </button>
     <button
       v-else
       type="button"
       class="btn btn-danger"
-      @click.prevent="deleteLike(photo.photo_id), flip()"
+      @click.prevent="unLike(photo.photo_id), likes-=1"
     >
       <span>
         <i class="fas fa-heart"></i>
-        {{photo.likes}}
+        {{likes}}
       </span>
     </button>
   </div>
@@ -29,80 +30,80 @@
 
 <script>
 export default {
-  name: "likes",
+  name: "Likes",
   props: {
     photo: Object,
   },
   data() {
     return {
-      liked: false,
-      photo_id: "",
-      user_id: "",
+      photos: [],
+      likedPhotos: [],
+      likes: this.photo.likes,
     };
   },
   mounted: function () {
-    this.isliked();
+    this.checkUserFavorites();
   },
   methods: {
-    flip() {
-      this.liked = !this.liked;
-    },
-    isLiked(photoId) {
-      let isLiked = false;
-      let userFavPhotos = [];
-      fetch("http://localhost:8080/likes/photo/" + photoId, {
-        method: "get",
-      }).then((response) => (this.userFavPhotos = response.json()));
-
-      userFavPhotos.forEach((photo) => {
-        if (photo.photo_id == photoId) {
-          isLiked = true;
-        }
-      });
-      return isLiked;
-    },
-    addLike() {
-      //mounted?
-      this.photo_id = this.photo.photo_id;
-      this.user_id = this.photo.user_id;
-      fetch("http://localhost:8080/addLike/", {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          photo_id: this.photo_id,
-          user_id: this.user_id,
-        }),
+    checkUserFavorites() {
+      fetch("http://localhost:8080/likes/photo/" + this.photo.photo_id, {
+        method: "GET",
       })
-        .then((response) => {
-          console.log(response);
+        .then((response) => response.json())
+        .then((json) => {
+          this.likedPhotos = json;
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          console.log(err);
         });
     },
-    deleteLike() {
-      //mounted?
-      this.photo_id = this.photo.photo_id;
-      this.user_id = this.photo.user_id;
-      fetch("http://localhost:8080/deleteLike/", {
-        method: "delete",
+    inLikes(photoId) {
+      let isFav = false;
+      this.likedPhotos.forEach((photo) => {
+        if (photo.photo_id == photoId) {
+          isFav = true;
+        }
+      });
+      return isFav;
+    },
+    addLike(photo_id) {
+      fetch("http://localhost:8080/addLike", {
+        method: "POST",
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+          "content-type": "application/json",
         },
         body: JSON.stringify({
-          photo_id: this.photo_id,
-          user_id: this.user_id,
+          user_id: this.$store.state.user.id,
+          photo_id: photo_id,
         }),
       })
         .then((response) => {
-          console.log(response);
+          if (response.status === 201) {
+            this.checkUserFavorites();
+          }
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    unLike(photo_id) {
+      fetch("http://localhost:8080/deleteLike", {
+        method: "DELETE",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: this.$store.state.user.id,
+          photo_id: photo_id,
+        }),
+      })
+        .then((response) => {
+          if (response.status === 204) {
+            this.checkUserFavorites();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
         });
     },
   },
