@@ -28,6 +28,12 @@
             </button>
           </router-link>
 
+          <router-link :to="{ name: 'explore'}">
+            <button class="btn btn-dark">
+              <i class="fas fa-compass"></i>
+            </button>
+          </router-link>
+
           <router-link v-bind:to="{ name: 'favorites' }">
             <button class="btn btn-dark">
               <i class="fas fa-star"></i>
@@ -62,7 +68,7 @@ nav {
   font-size: 1.5rem;
 }
 #addButton {
-  margin-left: 100%;
+  margin-left: 110%;
 }
 #logo {
   color: white;

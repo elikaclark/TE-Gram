@@ -12,6 +12,7 @@ import Test from '../views/Test.vue'
 import Favorites from '../views/Favorite.vue'
 import UserProfile from '../views/UserProfile.vue'
 import UserSettings from '../views/UserSettings.vue'
+import Explore from '../views/Explore.vue'
 
 Vue.use(Router)
 
@@ -32,6 +33,14 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: Home,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/explore',
+      name: 'explore',
+      component: Explore,
       meta: {
         requiresAuth: true
       }
