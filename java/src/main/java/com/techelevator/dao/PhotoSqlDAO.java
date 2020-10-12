@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techelevator.model.PhotoToLikes;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,11 @@ import com.techelevator.model.UserToFavorite;
 public class PhotoSqlDAO implements PhotoDAO {
 
 	private JdbcTemplate jdbcTemplate;
+	private PhotoToLikesSqlDAO photo2LikesDao;
 
 	public PhotoSqlDAO(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
+		this.photo2LikesDao = new PhotoToLikesSqlDAO(this.jdbcTemplate);
 	}
 
 	@Override
@@ -126,7 +129,11 @@ public class PhotoSqlDAO implements PhotoDAO {
         photo.setPhoto_id(rs.getInt("photo_id"));
         photo.setDescription(rs.getString("description"));
         photo.setPhoto_src(rs.getString("photo_src"));
-        photo.setLikes(rs.getInt("likes"));
+
+        long id = photo.getPhoto_id();
+        List<PhotoToLikes> numLikes = this.photo2LikesDao.getLikesByPhotoId(id);
+        photo.setLikes(numLikes.size());
+
         photo.setTimestamp(rs.getDate("datetime"));
         photo.setUser_id(rs.getInt("user_id"));
         return photo;
