@@ -86,6 +86,13 @@ public class UserSqlDAO implements UserDAO {
 
         return userCreated;
     }
+    
+    @Override
+    public void updateUser(User user) {
+    	String sqlUpdUser = "UPDATE users SET username = ?, name=? WHERE user_id =?";
+		jdbcTemplate.update(sqlUpdUser, user.getUsername(), user.getName(), user.getId());
+		
+    }
 
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
@@ -97,4 +104,5 @@ public class UserSqlDAO implements UserDAO {
         user.setActivated(true);
         return user;
     }
+
 }

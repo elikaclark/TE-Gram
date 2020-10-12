@@ -8,7 +8,6 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
 
 import com.techelevator.model.PhotoToLikes;
-import com.techelevator.model.UserToFavorite;
 
 @Service
 public class PhotoToLikesSqlDAO implements PhotoToLikesDAO {
