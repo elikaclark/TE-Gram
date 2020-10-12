@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import java.util.List;
 
+import com.techelevator.model.Photo;
 import com.techelevator.model.PhotoToLikes;
 
 public interface PhotoToLikesDAO {
@@ -10,6 +11,7 @@ public interface PhotoToLikesDAO {
 	List<PhotoToLikes> getLikesByPhotoId(Long photo_id);
 	public void addLike(PhotoToLikes like);
 	boolean deleteLike(PhotoToLikes like);
+	List<Photo> getAllUserLikes(Long userId);
 	
 	
 	

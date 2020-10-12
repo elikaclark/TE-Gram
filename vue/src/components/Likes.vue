@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     checkUserFavorites() {
-      fetch("http://localhost:8080/likes/photo/" + this.photo.photo_id, {
+      fetch("http://localhost:8080/" + this.$store.state.user.id + "/likes", {
         method: "GET",
       })
         .then((response) => response.json())

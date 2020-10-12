@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
 
+import com.techelevator.model.Photo;
 import com.techelevator.model.PhotoToLikes;
 
 @Service
@@ -34,6 +35,29 @@ public class PhotoToLikesSqlDAO implements PhotoToLikesDAO {
 			allLikes.add(like);
 		}
 		return allLikes;
+	}
+	
+	@Override
+	public List<Photo> getAllUserLikes(Long userId) {
+		List<PhotoToLikes> allLikesByUser = new ArrayList<>();
+		List<Photo> userLikedPhotos = new ArrayList<>();
+		
+		String sql = "Select * from photo_to_likes where user_id = ?";
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, userId);
+		while(result.next()) {
+			PhotoToLikes like = new PhotoToLikes();
+			like.setUser_id(result.getLong("user_id"));
+			like.setPhoto_id((result.getLong("photo_id")));
+			
+			allLikesByUser.add(like);
+		}
+		
+		PhotoSqlDAO photoDao = new PhotoSqlDAO(jdbcTemplate);
+		allLikesByUser.forEach(UserToFavorite ->{
+			Photo favPhoto =  photoDao.getPhotoById(UserToFavorite.getPhoto_id().intValue());
+			userLikedPhotos.add(favPhoto);
+		});
+		return userLikedPhotos;
 	}
 	
 	@Override
