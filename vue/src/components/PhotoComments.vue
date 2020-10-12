@@ -52,7 +52,7 @@
               <b>
                 <Username v-bind:photo="comment" />
               </b>
-              10/10/1999
+              {{comment.datetime}}
             </div>
             "{{comment.text}}"
             <br />

@@ -1,9 +1,12 @@
+//PASS IN PHOTO INFO
+
 <template>
   <div>
     <div v-if="liked==false">
       <button @click="flip" type="button" class="btn btn-dark">
         <span>
           <i class="far fa-heart"></i>
+          {{photo.likes}}
         </span>
       </button>
     </div>
@@ -11,6 +14,7 @@
       <button @click="flip" type="button" class="btn btn-danger">
         <span>
           <i class="fas fa-heart"></i>
+          {{photo.likes}}
         </span>
       </button>
     </div>

@@ -35,7 +35,7 @@ export default {
         return response.json();
       })
       .then((jsonBody) => {
-        this.photos = jsonBody;
+        this.photos = jsonBody.reverse();
       });
   },
 };

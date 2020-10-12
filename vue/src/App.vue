@@ -4,7 +4,7 @@
     <div id="nav">
       <nav
         v-if="$store.state.token != ''"
-        class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top justify-content-between"
+        class="navbar d-flex navbar-expand-sm bg-dark navbar-dark fixed-top justify-content-between"
       >
         <!--Home button-->
         <div>
@@ -58,6 +58,9 @@
 </template>
 
 <style scoped>
+nav {
+  font-size: 1.5rem;
+}
 #addButton {
   margin-left: 100%;
 }

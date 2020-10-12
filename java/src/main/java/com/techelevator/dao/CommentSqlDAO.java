@@ -92,7 +92,7 @@ public class CommentSqlDAO implements CommentDAO {
 		comment.setText(rs.getString("text"));
 		comment.setLikes(rs.getInt("likes"));
 		comment.setPhoto_id(rs.getInt("photo_id"));
-		comment.setDatetime(rs.getTimestamp("datetime"));
+		comment.setDatetime(rs.getDate("datetime"));
 		comment.setUser_id(rs.getInt("user_id"));
 
 		return comment;

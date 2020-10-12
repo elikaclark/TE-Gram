@@ -25,11 +25,13 @@
               alt
               data-toggle="modal"
               :data-target="'#'+'picModal'+photo.photo_id"
+              @click="flip()"
             />
           </div>
 
           <!-- Modal -->
           <div
+            v-show="modalOn==true"
             class="modal fade"
             :id="'picModal' + photo.photo_id"
             tabindex="-1"
@@ -75,9 +77,12 @@
           </div>
           <!-- . -->
           <div class="bg-dark" id="description">
-            <b>
-              <Username :photo="photo" />
-            </b>
+            <span class="d-flex justify-content-between">
+              <b>
+                <Username :photo="photo" />
+              </b>
+              {{photo.timestamp}}
+            </span>
             "{{photo.description|limit(117)}}"
           </div>
         </div>
@@ -94,6 +99,11 @@ import Edit from "../components/Edit";
 import Username from "../components/Username";
 
 export default {
+  data() {
+    return {
+      modalOn: false,
+    };
+  },
   components: {
     Favorite,
     PhotoComments,
@@ -105,13 +115,18 @@ export default {
     photos: Array,
   },
   filters: {
-    limit: function(value) {
+    limit: function (value) {
       if (value.length > 120) {
-        value = value.substring(0, 117) + '...';
+        value = value.substring(0, 117) + "...";
       }
-      return value
-    }
-  }
+      return value;
+    },
+  },
+  methods: {
+    flip() {
+      this.modalOn = !this.modalOn;
+    },
+  },
 };
 </script>
 
