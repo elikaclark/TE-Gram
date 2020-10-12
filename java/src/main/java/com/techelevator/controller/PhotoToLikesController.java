@@ -39,6 +39,7 @@ public class PhotoToLikesController {
 	List<Photo> likesByUser = photoToLikesDAO.getAllUserLikes(user_id);
 	return likesByUser;
 	}
+	
 	@RequestMapping(path = "/likes/photo/{id}", method = RequestMethod.GET)
 	public List<PhotoToLikes> getLikeByPhotoId(@PathVariable("id") Long photo_id) {
 		List<PhotoToLikes> allLikesByPhoto = photoToLikesDAO.getLikesByPhotoId(photo_id);
