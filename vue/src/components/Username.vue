@@ -17,16 +17,16 @@ export default {
     photo: Object,
   },
   created: function () {
-    var url = "http://localhost:8080/user/" + this.photo.user_id;
-    fetch(url, {
-      method: "get",
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((jsonBody) => {
-        this.users = jsonBody;
-      });
+    // var url = "http://localhost:8080/user/" + this.photo.user_id;
+    // fetch(url, {
+    //   method: "get",
+    // })
+    //   .then((response) => {
+    //     return response.json();
+    //   })
+    //   .then((jsonBody) => {
+    //     this.users = jsonBody;
+    //   });
   },
 };
 </script>

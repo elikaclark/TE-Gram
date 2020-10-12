@@ -2,6 +2,8 @@ package com.techelevator.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.techelevator.dao.UserDAO;
+import com.techelevator.model.Photo;
 import com.techelevator.model.User;
 
 @RestController
@@ -32,4 +35,10 @@ public class UserController {
 		User result = userDAO.getUserById(id);
 		return result;
 	}
+	
+	@RequestMapping(path="/users/{id}", method = RequestMethod.PUT)
+	public void updateUser(@Valid @RequestBody User user) {
+		userDAO.updateUser(user);
+	}
+	
 }
