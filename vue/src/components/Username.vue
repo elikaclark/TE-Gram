@@ -1,8 +1,6 @@
-//PASS IN USER ID 
+//PASS IN Photo
 <template>
-  <div>
-    {{users.name}}
-  </div>
+  <div>{{users.name}}</div>
 </template>
 
 <script>
