@@ -1,9 +1,12 @@
 <template>
   <div class="container">
     <header class="text-center">
-      <h1 v-if="$route.params.id == $store.state.user.id">Welcome, {{$store.state.user.name}}</h1>
-      <!-- THIS IS NOT RENDERING -->
-      <Username :photo="photos[0]" />
+      <h1 v-if="$route.params.id == $store.state.user.id">
+        {{$store.state.user.name}}'s Profile
+      </h1>
+      <h1 v-else>
+        {{users.name}}'s Profile
+      </h1>
     </header>
     <!-- Post -->
     <PostPhoto :photos="photos" />
@@ -12,22 +15,45 @@
 
 <script>
 import PostPhoto from "../components/PostPhoto";
-import Username from "../components/Username";
 
 export default {
   name: "profile",
   data() {
     return {
       photos: "",
+      users: ""
     };
   },
   components: {
     PostPhoto,
-    Username,
   },
   created: function () {
+    var url = "http://localhost:8080/user/" + this.$route.params.id;
+    fetch(url, {
+      method: "get",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((jsonBody) => {
+        this.users = jsonBody;
+      });
+  },
+  mounted: function () {
     var url = "http://localhost:8080/photos/users/" + this.$route.params.id;
-    console.log(url);
+    fetch(url, {
+      method: "get",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((jsonBody) => {
+        this.photos = jsonBody.reverse();
+        console.log(this.photos[0]);
+      });
+  },
+  updated: function () {
+    var url = "http://localhost:8080/photos/users/" + this.$route.params.id;
     fetch(url, {
       method: "get",
     })

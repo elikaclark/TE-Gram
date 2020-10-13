@@ -17,4 +17,8 @@ public interface UserDAO {
     boolean create(String username, String password, String role, String name);
     
    public void updateUser(User user);
+
+   public void UpdateUserPassword(Long id, String[]  passwords);
+
+   public void deleteUser(Long id);
 }

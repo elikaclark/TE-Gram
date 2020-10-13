@@ -40,5 +40,16 @@ public class UserController {
 	public void updateUser(@Valid @RequestBody User user) {
 		userDAO.updateUser(user);
 	}
+
+	@RequestMapping(path="/users/{id}/password", method = RequestMethod.PUT)
+	public void updateUserPassword(@PathVariable Long id, @RequestBody String[] passwords) {
+		userDAO.UpdateUserPassword(id, passwords);
+	}
+
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@RequestMapping(path="/users/{id}", method = RequestMethod.DELETE)
+	public void deleteUser(@PathVariable Long id) {
+		userDAO.deleteUser(id);
+	}
 	
 }

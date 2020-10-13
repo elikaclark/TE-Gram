@@ -7,7 +7,7 @@
     <div class="container">
       <div class="row">
         <div class="offset-lg-2 col-lg-8">
-          <img v-bind:src="output_src" alt />
+          <img v-bind:src="output_src" style="width: auto; height: 500px"/>
           <form @submit.prevent="uploadImage($event)" @change="checkImageStatus($event)">
             <div class="d-flex justify-content-center">
               <input type="file" id="file-upload" name="filename" />
@@ -34,8 +34,7 @@ export default {
     return {
       ready: false,
       data_url: "",
-      output_src:
-        "https://1adn3cp4l2-flywheel.netdna-ssl.com/wp-content/uploads/2018/02/ftp-upload.jpg",
+      output_src: "https://media2.giphy.com/media/5z0cCz0Xl8rjbU83Kc/giphy.gif",
       description: "",
       upload_src: "",
     };
@@ -84,7 +83,8 @@ export default {
         }),
       }).then((response) => {
         console.log(response);
-        this.$router.push('/');
+        //redirects to homepage
+        this.$router.push("/");
       });
     },
   },
@@ -96,6 +96,6 @@ img {
   width: 100%;
 }
 textarea {
-  width: 100%
+  width: 100%;
 }
 </style>

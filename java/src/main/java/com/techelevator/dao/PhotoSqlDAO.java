@@ -83,13 +83,14 @@ public class PhotoSqlDAO implements PhotoDAO {
 
 	@Override
 	public void deletePhoto(int photo_id) {
-		boolean photoDeleted;
 		long photoIdAsLong = photo_id;
 		UserToFavoriteSqlDAO userToFavDao = new UserToFavoriteSqlDAO(jdbcTemplate);
 		CommentSqlDAO commentDao = new CommentSqlDAO(jdbcTemplate);
 		List<Comment> commentsByPhotoId = commentDao.getAllCommentsByPhotoId(photo_id);
 		List<UserToFavorite> favoriteByPhotoId = userToFavDao.getAllFavoritesByPhotoId(photoIdAsLong);
-		
+		List<PhotoToLikes> likesByPhotoId = photo2LikesDao.getLikesByPhotoId(photoIdAsLong);
+
+
 		for (int i =0 ; i< favoriteByPhotoId.size(); i++) {
 			try {
 				userToFavDao.deleteFavorite(favoriteByPhotoId.get(i));
@@ -97,10 +98,17 @@ public class PhotoSqlDAO implements PhotoDAO {
 				System.out.println(e);
 			}
 		}
+
+		for (int i =0 ; i< likesByPhotoId.size(); i++) {
+			try {
+				photo2LikesDao.deleteLike(likesByPhotoId.get(i));
+			} catch(Exception e) {
+				System.out.println(e);
+			}
+		}
 		
 		for (int i =0 ; i < commentsByPhotoId.size(); i++) {
 			try {
-				System.out.println(commentsByPhotoId.get(i));
 				commentDao.deleteComment(commentsByPhotoId.get(i).getComment_id());
 			} catch(Exception e) {
 				System.out.println(e);

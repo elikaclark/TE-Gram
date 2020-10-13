@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import com.techelevator.model.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -11,15 +13,15 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.techelevator.model.User;
-
 @Service
 public class UserSqlDAO implements UserDAO {
 
     private JdbcTemplate jdbcTemplate;
+    private PhotoSqlDAO photoSqlDAO;
 
     public UserSqlDAO(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+        this.photoSqlDAO = new PhotoSqlDAO(this.jdbcTemplate);
     }
 
     @Override
@@ -92,6 +94,73 @@ public class UserSqlDAO implements UserDAO {
     	String sqlUpdUser = "UPDATE users SET username = ?, name=? WHERE user_id =?";
 		jdbcTemplate.update(sqlUpdUser, user.getUsername(), user.getName(), user.getId());
 		
+    }
+
+    @Override
+    public void UpdateUserPassword(Long id, String[] passwords) {
+        User temp = this.getUserById(id);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if (passwordEncoder.matches(passwords[0], temp.getPassword())) {
+            try {
+                String update = "Update users set password_hash = ? where user_id = ? ";
+                String newPword = new BCryptPasswordEncoder().encode(passwords[1]);
+                jdbcTemplate.update(update, newPword, id);
+                System.out.println("password changed");
+
+            }catch(Exception e){
+                throw(e);
+            }
+        }else{
+            System.out.println("could not change password");
+        }
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        UserToFavoriteSqlDAO userToFav = new UserToFavoriteSqlDAO(this.jdbcTemplate);
+        PhotoToLikesSqlDAO photoToLikes = new PhotoToLikesSqlDAO(this.jdbcTemplate);
+        CommentSqlDAO commentDao = new CommentSqlDAO(this.jdbcTemplate);
+        try{
+            //Get all photos by user to delete
+            List<Photo> allUserPhotos = this.photoSqlDAO.getPhotoByUserId(id.intValue());
+
+            //For each photo will call the deletePhoto method
+            //This will first delete all relation of that photo_id in the comments, userToFav, and userToLikes table
+            //And then delete the photo from the photos table
+            for(Photo userPhoto : allUserPhotos){
+                this.photoSqlDAO.deletePhoto(userPhoto.getPhoto_id());
+            }
+
+            //Now need to retrieve all favorites, likes and comments made by the user
+            List<Photo> allUserFav = userToFav.getAllUserFavorites(id);
+            List<Photo> allUserLikes = photoToLikes.getAllUserLikes(id);
+            List<Comment> allUserComments = commentDao.getAllCommentsByUserId(id.intValue());
+
+            //deleting all rows in userToFav made by user
+            for(Photo usrFavPhoto : allUserFav){
+                long photoId = usrFavPhoto.getPhoto_id();
+                UserToFavorite userFav = new UserToFavorite(id, photoId);
+                userToFav.deleteFavorite(userFav);
+            }
+
+            //deleting all rows in photoToLikes made by user
+            for(Photo userLikedPhoto : allUserLikes){
+                long photoId = userLikedPhoto.getPhoto_id();
+                PhotoToLikes userLike = new PhotoToLikes(photoId, id);
+                photoToLikes.deleteLike(userLike);
+            }
+
+            //deleting all rows in comments by user
+            for(Comment usrComment : allUserComments){
+                commentDao.deleteComment(usrComment.getComment_id());
+            }
+
+            //now deleting the user after all foreign keys have been removed
+            String delete = "Delete from users where user_id = ? ";
+            this.jdbcTemplate.update(delete, id);
+        }catch (Exception e){
+            throw(e);
+        }
     }
 
     private User mapRowToUser(SqlRowSet rs) {
