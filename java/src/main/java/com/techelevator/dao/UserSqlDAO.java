@@ -97,17 +97,20 @@ public class UserSqlDAO implements UserDAO {
     @Override
     public void UpdateUserPassword(Long id, String[] passwords) {
         User temp = this.getUserById(id);
-        String oldPassword_hash = new BCryptPasswordEncoder().encode(passwords[0]);
-        try {
-            if (temp.getPassword() == oldPassword_hash) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if (passwordEncoder.matches(passwords[0], temp.getPassword())) {
+            try {
                 String update = "Update users set password_hash = ? where user_id = ? ";
                 String newPword = new BCryptPasswordEncoder().encode(passwords[1]);
-                jdbcTemplate.update(update, newPword);
-            }
-        }catch (Exception e){
-            System.out.println(e);
-        }
+                jdbcTemplate.update(update, newPword, id);
+                System.out.println("password changed");
 
+            }catch(Exception e){
+                System.out.println(e);
+            }
+        }else{
+            System.out.println("could not change password");
+        }
     }
 
     private User mapRowToUser(SqlRowSet rs) {
