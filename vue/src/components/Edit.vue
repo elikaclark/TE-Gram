@@ -40,7 +40,11 @@
 
             <div class="d-flex justify-content-between">
               <button class="btn btn-success" @click="editUpload()" type="submit">Confirm Changes</button>
-              <button class="btn btn-danger" @click="deleteUpload(photo.photo_id)" type="submit">DELETE POST</button>
+              <button
+                class="btn btn-danger"
+                @click="deleteUpload(photo.photo_id)"
+                type="submit"
+              >DELETE POST</button>
             </div>
           </div>
           <div class="modal-footer bg-dark">
@@ -90,7 +94,7 @@ export default {
       fetch(url, {
         method: "delete",
       });
-      window.location.reload();
+      this.$router.push("/");
     },
   },
 };
@@ -103,7 +107,7 @@ export default {
 textarea {
   width: 100%;
 }
-#banner{
-  color:white;
+#banner {
+  color: white;
 }
 </style>

@@ -33,7 +33,7 @@
                 >Update Username</button>
               </div>
 
-              <div v-if="userNameSuccess">Successfully updated username!</div>
+              <div v-if="userNameSuccess" style="color:green">Success! Re-log to see changes</div>
             </form>
           </div>
         </div>
