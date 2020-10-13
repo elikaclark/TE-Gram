@@ -13,6 +13,8 @@ public interface CommentDAO {
 	public void deleteComment(int commentId);
 	
 	public List<Comment> getAllCommentsByPhotoId(int photoId);
+
+	public List<Comment> getAllCommentsByUserId(int userId);
 	
 	public Comment getCommentById(int commentId);
 	

@@ -19,4 +19,6 @@ public interface UserDAO {
    public void updateUser(User user);
 
    public void UpdateUserPassword(Long id, String[]  passwords);
+
+   public void deleteUser(Long id);
 }

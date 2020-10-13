@@ -68,6 +68,21 @@ public class CommentSqlDAO implements CommentDAO {
 	}
 
 	@Override
+	public List<Comment> getAllCommentsByUserId(int userId) {
+		List<Comment> allCommentsByUserId = new ArrayList<>();
+
+		String sqlSelect = "SELECT * FROM comments WHERE user_id = ? ";
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sqlSelect, userId);
+
+		while (result.next()) {
+			Comment comment = mapRowToComment(result);
+
+			allCommentsByUserId.add(comment);
+		}
+		return allCommentsByUserId;
+	}
+
+	@Override
 	public Comment getCommentById(int commentId) {
 		String sql = "SELECT * FROM comments WHERE comment_id = ?";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, commentId);
