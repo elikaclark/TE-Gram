@@ -26,9 +26,9 @@ public class CommentSqlDAOTest extends DAOIntegrationTest {
 	    @BeforeClass
 	    public static void setupDataSource() {
 	        dataSource = new SingleConnectionDataSource();
-	        dataSource.setUrl("jdbc:postgresql://localhost:5432/final_capstone");
-	        dataSource.setUsername("final_capstone_appuser");
-	        dataSource.setPassword("finalcapstone");
+	        dataSource.setUrl("jdbc:postgresql://testdb.cqp384uauftt.us-east-2.rds.amazonaws.com/final_capstone");
+	        dataSource.setUsername("postgres");
+	        dataSource.setPassword("postgres1");
 	       
 	        dataSource.setAutoCommit(false);
 	    }
