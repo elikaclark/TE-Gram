@@ -1,38 +1,46 @@
 <template>
   <div class="container">
-    <h2 class="ui dividing header">Edit Profile</h2>
-
-    <form class="ui form" @submit.prevent="editUser">
-      <div class="field">
-        <label>Current name</label>
-        {{ $store.state.user.name }}
-      </div>
-
-      <div class="field">
-        <label>New name</label>
-        <input type="text" v-model="newUser.name" name="name" />
-      </div>
-
-      <div class="field">
-        <label>Email</label>
-        {{ $store.state.user.username }}
-      </div>
-
-      <div class="field">
-        <label>New Email</label>
-        <input type="email" v-model="newUser.username" name="userName" />
-      </div>
-
-      <button class="ui button primary">
-        Update profile
-      </button>
-    </form>
     <div
       v-if="
         $route.params.id == this.$store.state.user.id ||
         $store.state.user.authorities[0].name === 'ROLE_ADMIN'
       "
     >
+      <div class="field"></div>
+      <h2 class="ui dividing header">Edit Profile</h2>
+      <label>Email:</label>
+      {{ $store.state.user.username }}
+      <form class="ui form" @submit.prevent="editUser">
+        <div class="field">
+          <label>Current name:</label>
+          {{ $store.state.user.name }}
+        </div>
+
+        <div class="field">
+          <label>New name:</label>
+          <input type="text" v-model="newUser.name" name="name" />
+        </div>
+        <button class="ui button primary">Update Username</button>
+      </form>
+      <br />
+      <form>
+        <div class="field">
+          <label>Old Password:</label>
+          <input type="text" v-model="oldPass" name="oldPass" />
+        </div>
+
+        <div class="field">
+          <label>New Password:</label>
+          <input type="text" v-model="newPass" name="newPass" />
+        </div>
+
+        <div class="field">
+          <label>Confirm New Password:</label>
+          <input type="text" v-model="newPassCon" name="newPassCon" />
+        </div>
+
+        <button @click="changePassword()">UPDATE PASSWORD</button>
+      </form>
       SETTINGS
       {{ users }}
     </div>
@@ -54,6 +62,9 @@ export default {
       users: [],
       newUser: {
         id: this.$store.state.user.id,
+        oldPass: "",
+        newPass: "",
+        newPassCon: "",
       },
     };
   },
@@ -71,7 +82,7 @@ export default {
   },
   methods: {
     editUser() {
-      console.log('sending');
+      console.log("sending");
       fetch("http://localhost:8080/users/" + this.$route.params.id, {
         method: "put",
         headers: {
@@ -80,6 +91,24 @@ export default {
         },
         body: JSON.stringify(this.newUser),
       }).then((response) => {
+        console.log(response);
+        window.location.reload();
+      });
+    },
+    changePassword() {
+      var passwords = [this.oldPass, this.newPass];
+      console.log(passwords);
+      fetch(
+        "http://localhost:8080/users/" + this.$route.params.id + "/password",
+        {
+          method: "put",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(passwords),
+        }
+      ).then((response) => {
         console.log(response);
         window.location.reload();
       });

@@ -1,9 +1,14 @@
 <template>
   <div class="container">
     <header class="text-center">
-      <h1 v-if="$route.params.id == $store.state.user.id">Welcome, {{$store.state.user.name}}</h1>
-      <!-- THIS IS NOT RENDERING -->
-      <Username :photo="photos[0]" />
+      <h1 v-if="$route.params.id == $store.state.user.id">
+        Welcome, {{$store.state.user.name}}
+        <Username :photo="photos[0]" />
+      </h1>
+      <h1 v-else-if="$route.params.id != $store.state.user.id">
+        Display please?
+        <Username :photo="photos[0]" />
+      </h1>
     </header>
     <!-- Post -->
     <PostPhoto :photos="photos" />
@@ -25,9 +30,8 @@ export default {
     PostPhoto,
     Username,
   },
-  created: function () {
+  mounted: function () {
     var url = "http://localhost:8080/photos/users/" + this.$route.params.id;
-    console.log(url);
     fetch(url, {
       method: "get",
     })
@@ -36,6 +40,19 @@ export default {
       })
       .then((jsonBody) => {
         this.photos = jsonBody.reverse();
+      });
+  },
+  updated: function () {
+    var url = "http://localhost:8080/photos/users/" + this.$route.params.id;
+    fetch(url, {
+      method: "get",
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((jsonBody) => {
+        this.photos = jsonBody.reverse();
+        console.log(this.photos);
       });
   },
 };
