@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <PostPhoto :photos = "photos"/>
+    <div class="text-center">
+      <h1>Welcome, {{$store.state.user.name}}</h1>
+    </div>
+    <PostPhoto :photos="photos" />
   </div>
 </template>
 
