@@ -7,7 +7,7 @@
       "
     >
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="card">
             <h2 class="header bg-dark">Change Username</h2>
             <div class="d-flex justify-content-between">
@@ -25,16 +25,19 @@
                 <input type="text" v-model="newUser.name" name="name" />
               </div>
               <br />
-              <button
-                :disabled="newUser.name.length == 0"
-                @click="editUser(), userNameFlip()"
-                class="btn btn-warning float-right"
-              >Update Username</button>
+              <div class="d-flex float-right">
+                <button
+                  :disabled="newUser.name.length == 0"
+                  @click="editUser(), userNameFlip()"
+                  class="btn btn-warning"
+                >Update Username</button>
+              </div>
+
               <div v-if="userNameSuccess">Successfully updated username!</div>
             </form>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-5">
           <!-- PASSWORD FORM -->
           <div class="card">
             <h2 class="header bg-dark">Change Password</h2>
@@ -79,6 +82,24 @@
             </form>
           </div>
         </div>
+        <div class="col-md-3">
+          <div class="card">
+            <h2 class="header bg-dark">DELETE USER</h2>
+            <form>
+              <div class>
+                <div>Type email to confirm deletion: {{$store.state.user.username}}</div>
+                <input type="text" v-model="deleteConfirm" name="delete" id="deleteConfirm" />
+              </div>
+              <div class="bg-dark">
+                <button
+                  class="btn btn-danger float-right"
+                  :disabled="deleteConfirm != $store.state.user.username"
+                  @click="deleteUser"
+                >DELETE USER</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
     <div v-else>NOT AUTHORIZED</div>
@@ -106,6 +127,7 @@ export default {
       oldPass: "",
       newPass: "",
       newPassCon: "",
+      deleteConfirm: "",
     };
   },
   mounted: function () {
@@ -152,15 +174,22 @@ export default {
         }
       ).then((response) => {
         console.log(response);
-        // window.location.reload();
       });
       this.vm.$forceUpdate();
+    },
+    deleteUser() {
+      fetch("http://localhost:8080/users/" + this.$route.params.id, {
+        method: "delete",
+      }).then(this.$router.push("/logout"));
     },
   },
 };
 </script>
 
 <style scoped>
+#deleteConfirm {
+  width: 100%;
+}
 .header {
   color: white;
 }

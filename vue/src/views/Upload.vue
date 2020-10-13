@@ -83,6 +83,7 @@ export default {
         }),
       }).then((response) => {
         console.log(response);
+        //redirects to homepage
         this.$router.push("/");
       });
     },
