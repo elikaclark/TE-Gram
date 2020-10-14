@@ -63,7 +63,7 @@ public class CommentSqlDAOTest extends DAOIntegrationTest {
 		List<Comment> allComBefore = commentSqlDAO.findAll();
 		
 		Date date = new Date();
-		Comment temp = new Comment(1, 0, "test", 1, 1);
+		Comment temp = new Comment(1, 0, "test", 10, 1);
 		commentSqlDAO.addComment(temp);
 		List<Comment> allComAfter = commentSqlDAO.findAll();
 
@@ -72,12 +72,12 @@ public class CommentSqlDAOTest extends DAOIntegrationTest {
 
 	@Test
 	public void getAllCommentsByPhotoId() {
-		List<Comment> allComByPhotoBefore = commentSqlDAO.getAllCommentsByPhotoId(4);
+		List<Comment> allComByPhotoBefore = commentSqlDAO.getAllCommentsByPhotoId(10);
 		Date date = new Date();
-		Comment temp = new Comment(4, 4, "test", 4, 4);
+		Comment temp = new Comment(4, 4, "test", 10, 2);
 
 		commentSqlDAO.addComment(temp);
-		List<Comment> allComByPhotoAfter = commentSqlDAO.getAllCommentsByPhotoId(4);
+		List<Comment> allComByPhotoAfter = commentSqlDAO.getAllCommentsByPhotoId(10);
 
 		assertEquals(allComByPhotoBefore.size() + 1, allComByPhotoAfter.size());
 	}
@@ -87,7 +87,7 @@ public class CommentSqlDAOTest extends DAOIntegrationTest {
 		List<Comment> allComBefore = commentSqlDAO.findAll();
 
 		Date date = new Date();
-		Comment temp = new Comment(1, 1, "test", 1, 1);
+		Comment temp = new Comment(1, 1, "test", 10, 1);
 		commentSqlDAO.addComment(temp);
 
 		List<Comment> allComAfter = commentSqlDAO.findAll();
@@ -97,10 +97,10 @@ public class CommentSqlDAOTest extends DAOIntegrationTest {
 
 	@Test
 	public void deleteComment() {
+		Comment temp = new Comment(1, 0, "TEST%", 10, 1);
+		commentSqlDAO.addComment(temp);
 		List<Comment> allComBefore = commentSqlDAO.findAll();
-
-		Comment temp = new Comment(1, 0, null, 0, 0);
-		commentSqlDAO.deleteComment(1);
+		commentSqlDAO.deleteComment(allComBefore.get(0).getComment_id());
 
 		List<Comment> allComAfter = commentSqlDAO.findAll();
 
