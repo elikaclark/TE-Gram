@@ -118,7 +118,7 @@ export default {
         console.log(response);
       });
       // window.location.reload();
-      this.$router.go();
+      this.$router.push("/");
     },
 
     deleteComment(id) {
@@ -127,7 +127,7 @@ export default {
         method: "delete",
       });
       // window.location.reload();
-      this.$router.go();
+      this.$router.push("/");
     },
   },
 };
