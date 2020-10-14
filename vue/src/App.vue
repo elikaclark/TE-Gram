@@ -73,4 +73,10 @@ nav {
 #logo {
   color: white;
 }
+
+@media (max-width:700px ) {
+  #addButton {
+  margin-left: 0%;
+}
+}
 </style>
