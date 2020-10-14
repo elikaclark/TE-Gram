@@ -30,7 +30,7 @@ public class UserToFavoriteSqlDAOTest extends DAOIntegrationTest{
     public void getAllFavorites() {
         List<UserToFavorite> allFavsBefore = userToFavDao.getAllFavorites();
 
-        UserToFavorite temp = new UserToFavorite(1L, 1L);
+        UserToFavorite temp = new UserToFavorite(1L, 10L);
         userToFavDao.addFavorite(temp);
 
         List<UserToFavorite> allFavsAfter = userToFavDao.getAllFavorites();
@@ -40,22 +40,22 @@ public class UserToFavoriteSqlDAOTest extends DAOIntegrationTest{
 
     @Test
     public void getAllUserFavorites() {
-        List<Photo> allFavByUserBefore = userToFavDao.getAllUserFavorites(3L);
-        UserToFavorite temp = new UserToFavorite(3L, 1L);
+        List<Photo> allFavByUserBefore = userToFavDao.getAllUserFavorites(2L);
+        UserToFavorite temp = new UserToFavorite(2L, 10L);
 
         userToFavDao.addFavorite(temp);
-        List<Photo> allFavsByUserAfter = userToFavDao.getAllUserFavorites(3L);
+        List<Photo> allFavsByUserAfter = userToFavDao.getAllUserFavorites(2L);
 
         assertEquals(allFavByUserBefore.size() + 1, allFavsByUserAfter.size());
     }
 
     @Test
     public void getAllUsersByPhotoId() {
-        List<User> allFavByPhotoBefore = userToFavDao.getAllUsersByPhotoId(6L);
-        UserToFavorite temp = new UserToFavorite(3L, 6L);
+        List<User> allFavByPhotoBefore = userToFavDao.getAllUsersByPhotoId(10L);
+        UserToFavorite temp = new UserToFavorite(1L, 10L);
 
         userToFavDao.addFavorite(temp);
-        List<User> allFavsByPhotoAfter = userToFavDao.getAllUsersByPhotoId(6L);
+        List<User> allFavsByPhotoAfter = userToFavDao.getAllUsersByPhotoId(10L);
 
         assertEquals(allFavByPhotoBefore.size() + 1, allFavsByPhotoAfter.size());
     }
@@ -64,7 +64,7 @@ public class UserToFavoriteSqlDAOTest extends DAOIntegrationTest{
     public void addFavorite() {
         List<UserToFavorite> allFavsBefore = userToFavDao.getAllFavorites();
 
-        UserToFavorite temp = new UserToFavorite(1L, 1L);
+        UserToFavorite temp = new UserToFavorite(1L, 18L);
         userToFavDao.addFavorite(temp);
 
         List<UserToFavorite> allFavsAfter = userToFavDao.getAllFavorites();
@@ -74,9 +74,11 @@ public class UserToFavoriteSqlDAOTest extends DAOIntegrationTest{
 
     @Test
     public void deleteFavorite() {
-        List<UserToFavorite> allFavsBefore = userToFavDao.getAllFavorites();
+//        List<UserToFavorite> allFavsBefore = userToFavDao.getAllFavorites();
 
-        UserToFavorite temp = new UserToFavorite(3L, 7L);
+        UserToFavorite temp = new UserToFavorite(2L, 10L);
+        userToFavDao.addFavorite(temp);
+        List<UserToFavorite> allFavsBefore = userToFavDao.getAllFavorites();
         userToFavDao.deleteFavorite(temp);
 
         List<UserToFavorite> allFavsAfter = userToFavDao.getAllFavorites();
