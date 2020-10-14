@@ -31,6 +31,13 @@
     "chai": "^4.1.2",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "git-scripts": "^0.4.3",
+    "surge": "^0.21.6",
     "vue-template-compiler": "^2.6.10"
+  },
+  "git": {
+    "scripts": {
+      "pre-push": "surge --project ./ --domain tetime.surge.sh/"
+    }
   }
 }
