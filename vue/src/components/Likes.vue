@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     checkUserFavorites() {
-      fetch("http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/" + this.$store.state.user.id + "/likes", {
+      fetch("http://localhost:8080/" + this.$store.state.user.id + "/likes", {
         method: "GET",
       })
         .then((response) => response.json())
@@ -67,7 +67,7 @@ export default {
       return isFav;
     },
     addLike(photo_id) {
-      fetch("http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/addLike", {
+      fetch("http://localhost:8080/addLike", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -87,7 +87,7 @@ export default {
         });
     },
     unLike(photo_id) {
-      fetch("http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/deleteLike", {
+      fetch("http://localhost:8080/deleteLike", {
         method: "DELETE",
         headers: {
           "content-type": "application/json",

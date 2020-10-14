@@ -28,7 +28,7 @@ export default {
     PostPhoto,
   },
   created: function () {
-    var url = "http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/user/" + this.$route.params.id;
+    var url = "http://localhost:8080/user/" + this.$route.params.id;
     fetch(url, {
       method: "get",
     })
@@ -40,7 +40,7 @@ export default {
       });
   },
   mounted: function () {
-    var url = "http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/photos/users/" + this.$route.params.id;
+    var url = "http://localhost:8080/photos/users/" + this.$route.params.id;
     fetch(url, {
       method: "get",
     })
@@ -53,7 +53,7 @@ export default {
       });
   },
   updated: function () {
-    var url = "http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/photos/users/" + this.$route.params.id;
+    var url = "http://localhost:8080/photos/users/" + this.$route.params.id;
     fetch(url, {
       method: "get",
     })
