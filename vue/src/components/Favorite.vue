@@ -44,7 +44,7 @@ export default {
   methods: {
     checkUserFavorites() {
       fetch(
-        "http://localhost:8080/" + this.$store.state.user.id + "/favorites",
+        "http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/" + this.$store.state.user.id + "/favorites",
         {
           method: "GET",
         }
