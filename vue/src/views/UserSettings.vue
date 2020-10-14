@@ -131,7 +131,7 @@ export default {
     };
   },
   mounted: function () {
-    var url = "http://localhost:8080/user/" + this.$route.params.id;
+    var url = "http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/user/" + this.$route.params.id;
     fetch(url, {
       method: "get",
     })
@@ -148,7 +148,7 @@ export default {
     },
     editUser() {
       console.log("sending");
-      fetch("http://localhost:8080/users/" + this.$route.params.id, {
+      fetch("http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/users/" + this.$route.params.id, {
         method: "put",
         headers: {
           Accept: "application/json",
@@ -163,7 +163,7 @@ export default {
       var passwords = [this.oldPass, this.newPass];
       console.log(passwords);
       fetch(
-        "http://localhost:8080/users/" + this.$route.params.id + "/password",
+        "http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/users/" + this.$route.params.id + "/password",
         {
           method: "put",
           headers: {
@@ -178,7 +178,7 @@ export default {
       this.vm.$forceUpdate();
     },
     deleteUser() {
-      fetch("http://localhost:8080/users/" + this.$route.params.id, {
+      fetch("http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/users/" + this.$route.params.id, {
         method: "delete",
       }).then(this.$router.push("/logout"));
     },

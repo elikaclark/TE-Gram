@@ -87,7 +87,7 @@ export default {
   },
   methods: {
     commentsByPhoto(id) {
-      var url = "http://localhost:8080/" + id + "/comments";
+      var url = "http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/" + id + "/comments";
       fetch(url, {
         method: "GET",
       })
@@ -102,7 +102,7 @@ export default {
         });
     },
     saveUpload() {
-      fetch("http://localhost:8080/addComment/", {
+      fetch("http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/addComment/", {
         method: "post",
         headers: {
           Accept: "application/json",
@@ -121,7 +121,7 @@ export default {
     },
 
     deleteComment(id) {
-      var url = "http://localhost:8080/comments/" + id;
+      var url = "http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/comments/" + id;
       fetch(url, {
         method: "delete",
       });

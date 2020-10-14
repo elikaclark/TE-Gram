@@ -15,7 +15,7 @@ export default {
     photo: Object,
   },
   created: function () {
-    var url = "http://localhost:8080/user/" + this.photo.user_id;
+    var url = "http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/user/" + this.photo.user_id;
     fetch(url, {
       method: "get",
     })

@@ -126,7 +126,7 @@ export default {
         });
     },
     saveUpload() {
-      fetch("http://localhost:8080/addPhoto/", {
+      fetch("http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/addPhoto/", {
         method: "post",
         headers: {
           Accept: "application/json",
