@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <header class="text-center">
-      <h1 v-if="$route.params.id == $store.state.user.id">
-        {{$store.state.user.name}}'s Profile
+      <h1 v-if="this.$route.params.id == this.$store.state.user.id">
+        {{this.$store.state.user.name}}'s Profile
       </h1>
       <h1 v-else>
         {{users.name}}'s Profile

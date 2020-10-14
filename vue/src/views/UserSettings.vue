@@ -33,7 +33,7 @@
                 >Update Username</button>
               </div>
 
-              <div v-if="userNameSuccess" style="color:green">Success! Re-log to see changes</div>
+              <div v-if="userNameSuccess" style="color:green">Success! Your name has been changed!</div>
             </form>
           </div>
         </div>
@@ -157,6 +157,7 @@ export default {
         body: JSON.stringify(this.newUser),
       }).then((response) => {
         console.log(response);
+        this.$store.state.user.name = this.newUser.name;
       });
     },
     changePassword() {
