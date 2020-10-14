@@ -20,7 +20,7 @@ export default {
     };
   },
   mounted: function () {
-    fetch("http://localhost:8080/photos", {
+    fetch("http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/photos", {
       method: "get",
     })
       .then((response) => {

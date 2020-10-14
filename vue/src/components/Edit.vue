@@ -70,7 +70,7 @@ export default {
   },
   methods: {
     editUpload() {
-      fetch("http://localhost:8080/editPhoto", {
+      fetch("http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/editPhoto", {
         method: "put",
         headers: {
           Accept: "application/json",
@@ -90,7 +90,7 @@ export default {
       });
     },
     deleteUpload(id) {
-      var url = "http://localhost:8080/photos/" + id;
+      var url = "http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/photos/" + id;
       fetch(url, {
         method: "delete",
       });

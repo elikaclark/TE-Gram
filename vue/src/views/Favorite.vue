@@ -26,7 +26,7 @@ export default {
   methods: {
     checkUserFavorites() {
       fetch(
-        "http://localhost:8080/" + this.$store.state.user.id + "/favorites",
+        "http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/" + this.$store.state.user.id + "/favorites",
         {
           method: "GET",
         }
@@ -49,7 +49,7 @@ export default {
       return isFav;
     },
     addToFavorite(photo_id) {
-      fetch("http://localhost:8080/addFavorite", {
+      fetch("http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/addFavorite", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -69,7 +69,7 @@ export default {
         });
     },
     deleteFromFavorite(photo_id) {
-      fetch("http://localhost:8080/deleteFavorite", {
+      fetch("http://tegrambackendservice-env.eba-fudtugjs.us-east-2.elasticbeanstalk.com/deleteFavorite", {
         method: "DELETE",
         headers: {
           "content-type": "application/json",
