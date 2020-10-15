@@ -65,7 +65,7 @@
 
 <style scoped>
 nav {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 #addButton {
   margin-left: 110%;
@@ -77,6 +77,19 @@ nav {
 @media (max-width:700px ) {
   #addButton {
   margin-left: 0%;
+  }
 }
-}
+@media only screen 
+    and (device-width : 375px) 
+    and (device-height : 812px) 
+    and (-webkit-device-pixel-ratio : 3){
+        #addButton {
+      margin-left: 0%;
+      }
+      nav{
+        font-size: 1.0rem;
+      } 
+    }
+
+
 </style>
