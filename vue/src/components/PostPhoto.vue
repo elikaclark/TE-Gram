@@ -3,7 +3,7 @@
 <template>
   <div>
     <div class="row posts">
-      <div class="col-sm-12 col-md-4 post-box" v-for="photo in photos" :key="photo.photo_id">
+      <div class="col-sm-12 col-md-12 col-lg-4 post-box" v-for="photo in photos" :key="photo.photo_id">
         <div class="d-flex justify-content-between bg-dark">
           <router-link :to="'/profile/'+photo.user_id" id="postUsername">
             <span class="d-flex">

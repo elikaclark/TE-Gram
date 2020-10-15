@@ -86,6 +86,7 @@ export default {
         }),
       }).then((response) => {
         console.log(response);
+        this.$router.push("/");
         window.location.reload();
       });
     },
@@ -95,6 +96,7 @@ export default {
         method: "delete",
       });
       this.$router.push("/");
+      window.location.reload();
     },
   },
 };
