@@ -117,8 +117,9 @@ export default {
       }).then((response) => {
         console.log(response);
       });
-      // window.location.reload();
-      this.$router.go();
+      
+      this.$router.push('/');
+      window.location.reload();
     },
 
     deleteComment(id) {
@@ -126,8 +127,9 @@ export default {
       fetch(url, {
         method: "delete",
       });
-      // window.location.reload();
-      this.$router.go();
+     
+      this.$router.push('/');
+     window.location.reload();
     },
   },
 };
