@@ -127,6 +127,7 @@ export default {
     background-image: url("https://i.pinimg.com/originals/e4/21/89/e4218901f99a8ae6fa14955360f9a03b.gif");
     background-size: 720px 600px;
     background-repeat: no-repeat;
+    background-position: center;
   }
 
   .form-control {
