@@ -127,7 +127,11 @@ export default {
     background-image: url("https://i.pinimg.com/originals/e4/21/89/e4218901f99a8ae6fa14955360f9a03b.gif");
     background-size: 720px 600px;
     background-repeat: no-repeat;
+<<<<<<< HEAD
+    background-position: top;
+=======
     background-position: center;
+>>>>>>> 243e6c93130a1d70880dd47b28a1514ffba2f1e8
   }
 
   .form-control {
